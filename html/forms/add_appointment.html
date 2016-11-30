@@ -1,15 +1,10 @@
 <!-- add_appointment.html -->
 <!-- This file is the form for the advisor to create and appointment -->
-<!--
-File call/redirect
-	Receive: advisor_view.php
-	Send: validate_appointment.php
--->
 
 <?php require('header.html'); ?>
     <h1>Add an appointment </h1>
     <form method=post action="../../php/validate/validate_appointment.php">
-    <!-- Gets the necessary information about the appontment, date, time, location, group -->
+    <!-- Gets the necessary information about the appontment, date, time, location, group --> 
     <p>Date: <input type=date name="date"/></p>
     <p>
       <!-- Time is restricted to only having the times between 8:00am and 4:30 pm selected in 30 minutes increments -->

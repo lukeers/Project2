@@ -1,16 +1,12 @@
 <!-- login_avisor.html -->
 <!-- This file will get a username from the user then compare it to the database, if there is a match then the user will be logged in -->
-<!--
-File call/redirect
-	Receive: register_advisor.html
-	Send: validate_advisor_login.php, register_advisor.html
--->
 
 <?php include ('header.html'); ?>
 <h1>Advisor Login</h1>
     <form method=post action='../../php/validate/validate_advisor_login.php'>
       <!-- Gets the only necessary data, a username from the user -->
-      <p>Username: <input type=text name="username"/></p>
+      <p>Username: <input type=text name="entered_username"/></p>
+      <p>Password: <input type=text name="entered_password"/></p>
       <p><input type=submit value="Submit"/></p>
     </form>
 

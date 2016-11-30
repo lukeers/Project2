@@ -1,10 +1,5 @@
-<!-- advisor_view.php -->
+<!-- advisor_view.php --> 
 <!-- This file shows the advisor what appointments they have scheduled -->
-<!--
-File call/redirect
-	Receive: validate_advisor_login.php, advisor_view.php, validate_appointment.php, cancel_advisor_appointment.php
-	Send: first_page.html, cancel_advisor_appointment.php, add_appointment.html
--->
 
 <html>
 <head>
@@ -15,7 +10,7 @@ border: 1px solid black;
 }
 
 td {
-text-align:center;
+text-align:center; 
 vertical-align:middle;
 }
 
@@ -28,7 +23,7 @@ top:8px;
 <body>
 
 <?php
-require_once('../mysql_connect.php');
+require_once('../mysql_connect.php'); 
 session_start();
 
 // set the timezone to the east coast
@@ -39,15 +34,15 @@ $sql = "SELECT * FROM appointments WHERE AdvisorUsername=\"" . $_SESSION['userna
 $rs = mysql_query($sql, $conn);
 
 // Tell the user who they are logged in as
-echo "Logged in as: " . $_SESSION['username'];
+echo "Logged in as: " . $_SESSION['username']; 
 echo  "<pre>  <a href = \"../../html/forms/first_page.html\">Log Me Out</a></pre>";
 
 $appt = mysql_fetch_array($rs);
 
-// Prints out the titles of the table
+// Prints out the titles of the table 
 if($appt)
 {
-  echo "<h3> My Scheduled Appointments </h3>";
+  echo "<h3> My Scheduled Appointments </h3>";	
   echo "<table>";
   echo "<tr>";
   echo "<th>Date</th>";
@@ -58,14 +53,14 @@ if($appt)
   echo "<th>View Registered Students</th>";
   echo "</tr>";
 
-  // Now this cycles through the section of the query
+  // Now this cycles through the section of the query 
   while ($appt) {
     echo "<tr>";
     echo "<td>" . $appt['Date'] . "</td>";
     echo "<td>" . date("g:ia", strtotime($appt['Time'])) . "</td>";
     echo "<td>" . $appt['Location'] . "</td>";
 
-    // check if the appointment is a group appointment or not
+    // check if the appointment is a group appointment or not 
     if($appt['isGroup'] == 0)
       echo "<td>" . "No" . "</td>";
     else
@@ -73,9 +68,9 @@ if($appt)
       echo "<td>" . "Yes" . "</td>";
 
     echo "<td>" . $appt['NumStudents'] . "</td>";
-
+ 
     $apptID = $appt['id'];
-
+  
     // Print out the check students button if there are students signed up for the appointment
     if ($appt['NumStudents'] > 0)
     {
@@ -86,7 +81,7 @@ if($appt)
       echo "</form>";
       echo "</td>";
 
-      // If there are not any students signed up then tell the user that
+      // If there are not any students signed up then tell the user that 
     } else {
       echo "<td>No Students Registered</td>";
     }
@@ -97,7 +92,7 @@ if($appt)
        <?php echo "<input type=hidden name='ID' value=$apptID />"; ?>
        <input type=submit value="Cancel"/>
        </form>
-	 </td>
+	 </td> 
 <?php
   echo "</tr>";
   $appt = mysql_fetch_array($rs);

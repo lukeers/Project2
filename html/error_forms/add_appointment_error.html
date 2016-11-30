@@ -1,14 +1,9 @@
-<!-- add_appointment_error.html -->
+<!-- add_appointment_error.html --> 
 <!-- This tile gives the form back to the advisor after they did something that was invalid -->
-<!--
-File call/redirect
-	Receive: validate_appointment.php
-	Send: validate_appointment.php
--->
 
 <?php require('../../html/header.html'); ?>
     <h1>Add an appointment </h1>
-        <!-- Prints the error message for the user to see what they did wrong -->
+        <!-- Prints the error message for the user to see what they did wrong --> 
 	<?php echo $error_message; ?>
 
     <form method=post action="../../php/validate/validate_appointment.php">
