@@ -1,12 +1,17 @@
 <!-- register_advisor.html -->
-<!-- Gets information from a potential advisor compares it to make sure 
-     there is not a match by username in the database then creates and logs in a new advisor 
---> 
+<!-- Gets information from a potential advisor compares it to make sure
+     there is not a match by username in the database then creates and logs in a new advisor
+-->
+<!--
+File call/redirect
+	Receive: first_page.html, login_advisor.html, advisor_login_error.html
+	Send: validate_advisor.php, login_advisor.html
+-->
 
 <?php require('../header.html'); ?>
     <h1>Advisor Registration</h1>
     <form method=post action='../../php/validate/validate_advisor.php'>
-      <!-- Gets information from the potential advisor, username, first name, last name --> 
+      <!-- Gets information from the potential advisor, username, first name, last name -->
       <p>Username: <input type=text name="username"/></p>
 	  <p>First Name: <input type=text name="fName"/></p>
 	  <p>Last Name: <input type=text name="lName"/></p>

@@ -1,5 +1,10 @@
 <!-- cancel_advisor_appointment.php -->
 <!-- This file will Delete the appointment from the appointments table and then update the students table to make sure the student is not in an appointment that does not exist -->
+<!--
+File call/redirect
+	Receive: advisor_view.php
+	Send: advisor_view.php
+-->
 
 <?php
 include ('mysql_connect.php');
@@ -16,7 +21,7 @@ $sql = "SELECT Username FROM students WHERE Appt=$apptID";
 
 $rs = mysql_query($sql, $conn);
 
-// Cycle through the selected students and change them in the data base 
+// Cycle through the selected students and change them in the data base
 while ( $row = mysql_fetch_array($rs) ) {
   $username = $row['Username'];
 
@@ -25,10 +30,10 @@ while ( $row = mysql_fetch_array($rs) ) {
   $sql = "UPDATE students SET Appt=NULL WHERE Username='$username'";
   echo $username;
   mysql_query($sql, $conn);
-  
+
 }
 
-// Return to the advisor view 
+// Return to the advisor view
 header('Location:view/advisor_view.php');
 
 ?>
