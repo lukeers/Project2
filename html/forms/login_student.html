@@ -1,7 +1,11 @@
 <!-- login_student.html --> 
 <!-- This file will get a username from the user then compare it to the database, if there is a match then the user will be logged in --> 
 
-<?php include ('header.html'); ?>
+<link rel="import" href="../header.html")>
+<link rel='stylesheet' type='text/css' href='../css/style.css'/>
+
+<div class="main">
+
 <h1>Student Login</h1>
     <form method=post action='../../php/validate/validate_student_login.php'>
       <!-- Gets the only necessary data, a username from the user --> 
@@ -11,4 +15,7 @@
 	
         <!-- Hyperlink to the register students page -->   
 	<p> Not signed up? Click <a href = "register_student.html">here</a> to register.</p>
-<?php include ('footer.html'); ?>
+	
+</div>
+
+<link rel="import" href="../footer.html")>
