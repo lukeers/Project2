@@ -1,0 +1,45 @@
+<!-- first_page.html -->
+<!-- This file is the first page seen by the user and is used to make session variables as well as get if the user is an advisor or a student -->
+
+<!-- This will reset the session if a session is already made when reaching this page --> 
+
+<link rel="import" href="../header.html")>
+<link rel='stylesheet' type='text/css' href='../css/style.css'/>
+
+<?php //include('../header.html'); 
+
+if($_SESSION['username'])
+{
+	unset($_SESSION['username']); 
+}
+
+if($_SESSION['appt'])
+{
+	unset($_SESSION['appt']);
+}
+session_destroy(); 
+?>
+
+	<div class="main">
+
+		<h1> Are you a student or an advisor? </h1>
+
+		<!-- Gets if the user is an advisor or a student then directs them to the appropriate page --> 
+		<div id="button">
+			<form method=post action="register_advisor.html">
+			<button type=submit>Advisor</button>
+			</form>
+		</div>
+    
+		<div id="button">
+			<form method=post action="register_student.html">
+			<button type=submit>Student</button>
+			</form>
+		</div>
+	
+	</div>
+
+<?php //require('../footer.html');// ?>
+
+<link rel="import" href="../footer.html")>
+
