@@ -14,7 +14,6 @@
 		padding: 20px 20px 20px; 
 		position: relative; 
 		width: 600px; 
-		border-color: black;
 		border-radius: 10px;
 	}
 	
@@ -25,4 +24,8 @@
 	
 	h1 {
 		font-size: 30px;
+	}
+	
+	button {
+		
 	}
