@@ -2,8 +2,11 @@
 <!-- Gets information from a potential student compares it to make sure
  there is not a match by username in the database then creates and logs in a new advisor 
 --> 
+<link rel="import" href="../header.html")>
+<link rel='stylesheet' type='text/css' href='../css/style.css'/>
 
-<?php require('../header.html'); ?>
+	<div class="main">
+
     <h1>Student Registration</h1>
     <form method=post action='../../php/validate/validate_student.php'>
       <!-- Gets information from the potential student, username, major --> 
@@ -32,4 +35,7 @@
 	
     	<!-- Hyperlink to the login student page -->
 	<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
-<?php require(../'footer.html'); ?>
+	
+	</div>
+
+<link rel="import" href="../footer.html")>
