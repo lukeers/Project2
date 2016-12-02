@@ -59,7 +59,7 @@ if ($errors != True)
   session_start();
   $_SESSION['username'] = $_POST['username'];
 
-  $hashedPassword = crypt($_POST['password'],"CRYPT_BLOWFISH");
+  $hashedPassword = sha1($_POST['password']);
 
 
   $sql = "INSERT INTO advisorpasswords (username, password) VALUES ('" . $_POST['username']. "' , '" . $hashedPassword . "')";
