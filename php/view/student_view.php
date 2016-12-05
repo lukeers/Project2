@@ -36,13 +36,13 @@ $rs = mysql_query($sql, $conn);
 if(mysql_fetch_array($rs))
 {
   //Getting Appointment Number
-  $sql = "SELECT Appt FROM students WHERE Username=\"" . $_SESSION['username'] . "\"";
+  $sql = "SELECT Appt FROM students WHERE studentID=\"" . $_SESSION['studentID'] . "\"";
   $rs = mysql_query($sql, $conn);
   
   $sqlRow = mysql_fetch_array($rs);
   $studentApptNum = $sqlRow['Appt']; 
 
-  echo "Logged in as: " . $_SESSION['username']; 
+  echo "Logged in as: " . $_SESSION['studentID']; 
   echo  "<pre>  <a href = \"../../html/forms/first_page.html\">Log Me Out</a></pre>";
 ?>
 
