@@ -1,14 +1,27 @@
 <!-- add_appointment.html -->
 <!-- This file is the form for the advisor to create and appointment -->
-
-<link rel="import" href="../header.html")>
-<link rel='stylesheet' type='text/css' href='../css/style.css'/>
-
-	<div class="main">
-	
+<!--
+File call/redirect
+	Receive: advisor_view.php
+	Send: validate_appointment.php
+-->
+<style>
+.appointSize
+{
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.appointSize_other
+{
+  margin-top: 5px;
+  min-width: 35px;
+  width: 50px;
+}
+</style>
+<?php include('../../php/advisor_nav_bar.php'); ?>
     <h1>Add an appointment </h1>
     <form method=post action="../../php/validate/validate_appointment.php">
-    <!-- Gets the necessary information about the appontment, date, time, location, group --> 
+    <!-- Gets the necessary information about the appontment, date, time, location, group -->
     <p>Date: <input type=date name="date"/></p>
     <p>
       <!-- Time is restricted to only having the times between 8:00am and 4:30 pm selected in 30 minutes increments -->
@@ -38,10 +51,21 @@
 	<option value=1 selected>Yes</option>
 	<option value=0>No</option>
       </select>
+      <br>
+      <input type="radio" class="appointSize" name="group_size" value="1">1
+      <input type="radio" class="appointSize" name="group_size" value="5">5
+      <input type="radio" class="appointSize" name="group_size" value="10">10
+      <input type="radio" class="appointSize" name="group_size" value="15">15
+      <input type="radio" class="appointSize" name="group_size" value="20">20
+      <input type="radio" class="appointSize" name="group_size" value="" id="other">
+          <input class="appointSize_other" type="number" min="0" onkeyup="groupSizeOther(this.value)">
     </p>
     <p><input type=submit value="Submit"/></p>
     </form>
 
-	</div>
-
-<link rel="import" href="../footer.html")>
+<script>
+function groupSizeOther(groupSize)
+{
+  document.getElementById('other').value = groupSize;
+}
+</script>
