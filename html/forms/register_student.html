@@ -8,13 +8,14 @@
 	<div class="main">
 
     <h1>Student Registration</h1>
-    <form method=post action='../../php/validate/validate_student.php'>
-      <!-- Gets information from the potential student, username, major --> 
-      <p>Username: <input type=text name="username"/></p>
-      <p>First Name: <input type=text name="firstName"/></p>
-      <p>Last Name: <input type=text name="lastName"/></p>
-      <p>Student ID: <input type=text name="studentID"/></p>
-      <p>UMBC Email: <input type=text name="email"/></p>
+    <form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateForm();">
+      <!-- Gets information from the potential student, username, major -->
+      <p>First Name: <input type=text name="firstName" required/></p>
+      <p>Last Name: <input type=text name="lastName" required/></p>
+      <p>Student ID: <input type=text name="studentID" required/></p>
+	  <p id="idErr"></p>
+      <p>UMBC Email: <input type=text name="email" required/></p>
+	  <p id="emailErr"></p>
       <p>Major: <select name="major">
 	  
 	  <!-- This creates a drop down box of the possible major choices -->
@@ -37,5 +38,24 @@
 	<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
 	
 	</div>
+	
+	<script>
+	function validateForm(){
+		var x = document.forms["studentform"];
+		var isValid = true;
+		
+		if(!/^[A-Za-z]{2}\d{5}$/g.test(x.studentID.value)){
+			x.studentID.style.borderColor = "red";
+			document.getElementById("idErr").innerHTML = "Invalid student ID.";
+			isValid = false;
+		}
+		if(!/^\w+@umbc\.edu$/g.test(x.email.value)){
+			x.email.style.borderColor = "red";
+			document.getElementById("emailErr").innerHTML = "Invalid student email.";
+			isValid = false;
+		}
+		return isValid;
+	}
+	</script>
 
 <link rel="import" href="../footer.html")>
