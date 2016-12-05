@@ -62,6 +62,7 @@ if ($errors != True)
   $hashedPassword = sha1($_POST['password']);
 
 
+
   $sql = "INSERT INTO advisorpasswords (username, password) VALUES ('" . $_POST['username']. "' , '" . $hashedPassword . "')";
   $rs = mysql_query($sql, $conn);
 

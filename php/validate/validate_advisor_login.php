@@ -26,6 +26,7 @@ $rs = mysql_query($sql, $conn);
 
 while($password = mysql_fetch_array($rs))
 {
+
   if (sha1($_POST['entered_password']) == $password['password'])
   {
     $password_found = True;
