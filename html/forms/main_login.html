@@ -1,0 +1,82 @@
+<script>
+function RegistrationChange(value)
+{
+  if(value == "Student")
+  {
+    document.getElementById("StudentRegistration").style.display = "block";
+    document.getElementById("AdvisorRegistration").style.display = "none";
+  }
+  else if (value == "Advisor") {
+    document.getElementById("StudentRegistration").style.display = "none";
+    document.getElementById("AdvisorRegistration").style.display = "block";
+  }
+}
+</script>
+
+<link rel="import" href="../header.html")>
+<link rel='stylesheet' type='text/css' href='../../css/style.css'/>
+
+
+<!-- Code -->
+	<div class="main">
+	
+	<div class="switch">
+		<button value="Student" class="button" onclick="RegistrationChange(this.value)">Student</button>
+		<button value="Advisor" class="button" onclick="RegistrationChange(this.value)">Advisor</button>
+	</div>
+
+<!-- Advisor Page -->
+	<div id="AdvisorRegistration" style="display:none">
+	
+<!--register_advisor.html"-->
+	<h1>Advisor Registration</h1>
+		<form method=post action='../../php/validate/validate_advisor.php'>
+		
+		<!-- Gets information from the potential advisor, username, first name, last name -->
+			<p>Username: <input type=text name="username"/></p>
+			<p>First Name: <input type=text name="fName"/></p>
+			<p>Last Name: <input type=text name="lName"/></p>
+			<p>Office: <input type=text name="office"/></p>
+			<p><input type=submit id="submit" class="button" value="Submit"/></p>
+		</form>
+		
+<!-- Hyperlink to the login advisor page -->
+	<p>Already signed up? Click <a href = "login_advisor.html">here</a> to log in.</p>
+	</div>
+	
+
+<!--Student Page -->
+	<div id="StudentRegistration">
+	
+<!--register_student.html"-->
+	<h1>Student Registration</h1>
+		<form method=post action='../../php/validate/validate_student.php'>
+		
+		<!-- Gets information from the potential student, username, major -->
+			<p>Username: <input type=text name="username"/></p>
+			<p>First Name: <input type=text name="firstName"/></p>
+			<p>Last Name: <input type=text name="lastName"/></p>
+			<p>Student ID: <input type=text name="studentID"/></p>
+			<p>UMBC Email: <input type=text name="email"/></p>
+			<p>Major: <select name="major">
+
+			<!-- This creates a drop down box of the possible major choices -->
+				<option value = "Biological Sciences BA">Biological Sciences BA</option>
+				<option value = "Biological Sciences BS">Biological Sciences BS</option>
+				<option value = "Biochemistry & Molecular Biology BS">Biochemistry & Molecular Biology BS</option>
+				<option value = "Bioinformatics & Computational Biology BS">Bioinformatics & Computational Biology BS</option>
+				<option value = "Biology Education BA">Biology Education BA</option>
+				<option value = "Chemistry BA">Chemistry BA</option>
+				<option value = "Chemistry BS">Chemistry BS</option>
+				<option value = "Chemistry Education BA">Chemistry Education BA</option>
+				<option value = "Other">Other</option>
+			</select>
+			</p>
+			<p><input type=submit id="submit" class="button" value="Submit"/></p>
+		</form>
+
+<!-- Hyperlink to the login student page -->
+	<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
+	</div>
+	</div>
+	
