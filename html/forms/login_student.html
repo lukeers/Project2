@@ -1,5 +1,5 @@
 <!-- login_student.html --> 
-<!-- This file will get a student ID from the user then compare it to the database, if there is a match then the user will be logged in --> 
+<!-- This file will get a username from the user then compare it to the database, if there is a match then the user will be logged in --> 
 
 <link rel="import" href="../header.html")>
 <link rel='stylesheet' type='text/css' href='../css/style.css'/>
@@ -7,10 +7,9 @@
 <div class="main">
 
 <h1>Student Login</h1>
-    <form name="studentLogin" method=post action='../../php/validate/validate_student_login.php' onsubmit="return validateForm();">
-      <!-- Gets the only necessary data, a student ID from the user --> 
-      <p>Student ID: <input type=text name="studentID" required/></p>
-      <p id="idErr"></p>
+    <form method=post action='../../php/validate/validate_student_login.php'>
+      <!-- Gets the only necessary data, a username from the user --> 
+      <p>Username: <input type=text name="username"/></p>
       <p><input type=submit value="Submit"/></p>
     </form>
 	
@@ -18,17 +17,5 @@
 	<p> Not signed up? Click <a href = "register_student.html">here</a> to register.</p>
 	
 </div>
-
-<script>
-function validateForm(){
-	var x = document.forms["studentLogin"].studentID;
-	if(!/^[A-Za-z]{2}\d{5}$/g.test(x.value)){
-		x.style.borderColor = "red";
-		document.getElementById("idErr").innerHTML = "Invalid student ID.";
-		return false;
-	}
-}
-</script>
-
 
 <link rel="import" href="../footer.html")>
