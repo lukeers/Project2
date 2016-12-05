@@ -12,9 +12,9 @@ $errors = False;
 $error_message = "";
 
 //Loop through usernames, check for match
-while($username = mysql_fetch_array($rs)) 
+while($username = mysql_fetch_array($rs))
 {
-  if ($_POST['username'] == $username['username']) 
+  if ($_POST['username'] == $username['username'])
   {
     //Match found - BAD - there is an error
     $errors = True;
@@ -23,21 +23,21 @@ while($username = mysql_fetch_array($rs))
 }
 
 //Username left blank check
-if ($_POST['username'] == "") 
+if ($_POST['username'] == "")
 {
     $errors = True;
     $error_message .= "Username field can't be blank.<br>";
 }
 
 //First name left blank check
-if ($_POST['fName'] == "") 
+if ($_POST['fName'] == "")
 {
     $errors = True;
     $error_message .= "First name field can't be blank.<br>";
 }
 
 //Last name left blank check
-if ($_POST['lName'] == "") 
+if ($_POST['lName'] == "")
 {
     $errors = True;
     $error_message .= "Last name field can't be blank.<br>";
@@ -50,7 +50,7 @@ if ($_POST['office'] == "")
     $error_message .= "Office field can't be blank.<br>";
   }
 
-if ($errors != True) 
+if ($errors != True)
 {
   //No errors - GOOD - Insert into database
   $fullName = $_POST['fName'] . " " . $_POST['lName'];
@@ -58,8 +58,18 @@ if ($errors != True)
   $rs = mysql_query($sql, $conn);
   session_start();
   $_SESSION['username'] = $_POST['username'];
+
+  $hashedPassword = sha1($_POST['password']);
+
+
+  $sql = "INSERT INTO advisorpasswords (username, password) VALUES ('" . $_POST['username']. "' , '" . $hashedPassword . "')";
+  $rs = mysql_query($sql, $conn);
+
+
   header('Location:../../php/view/advisor_view.php');
 }
+
+
 else
 {
   require('../../html/error_forms/register_advisor_error.html');
