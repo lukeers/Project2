@@ -21,20 +21,20 @@ while($username = mysql_fetch_array($rs))
     $name_found = True;
   }
 }
+if($name_found) {
+  $sql = "SELECT `password` FROM `advisorpasswords` WHERE `username`='" . $_POST['entered_username']. "'";
+  $rs = mysql_query($sql, $conn);
 
-$sql = "SELECT `password` FROM `advisorpasswords` WHERE `username`='" . $_POST['entered_username']. "'";
-$rs = mysql_query($sql, $conn);
+  if (!$rs) {
+    die("Error running $sql: " . mysql_error());
+  }
 
-if (!$rs) {
-  die("Error running $sql: " . mysql_error());
+  $password = mysql_fetch_array($rs);
+
+  if (sha1($_POST['entered_password']) == $password['password']) {
+      $password_match = True;
+  }
 }
-
-$password = mysql_fetch_array($rs);
-
-if (sha1($_POST['entered_password']) == $password['password']) {
-    $password_match = True;
-}
-
 
 // This is the pass case
 if ($name_found && $password)
