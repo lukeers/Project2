@@ -22,34 +22,6 @@ while($username = mysql_fetch_array($rs))
   }
 }
 
-//Username left blank check
-if ($_POST['username'] == "")
-{
-    $errors = True;
-    $error_message .= "Username field can't be blank.<br>";
-}
-
-//First name left blank check
-if ($_POST['fName'] == "")
-{
-    $errors = True;
-    $error_message .= "First name field can't be blank.<br>";
-}
-
-//Last name left blank check
-if ($_POST['lName'] == "")
-{
-    $errors = True;
-    $error_message .= "Last name field can't be blank.<br>";
-}
-
-//office left blank
-if ($_POST['office'] == "")
-  {
-    $errors = True;
-    $error_message .= "Office field can't be blank.<br>";
-  }
-
 if ($errors != True)
 {
   //No errors - GOOD - Insert into database
