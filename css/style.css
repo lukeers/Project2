@@ -22,7 +22,8 @@ h1 {
 
 .switch {
     display: block;
-    margin-left: 190px;
+    text-align: center;
+	border-bottom: thin solid;
 }
 
 .switch .button {
