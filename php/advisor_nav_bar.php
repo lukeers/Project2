@@ -79,13 +79,13 @@ p.nav_links:hover
   <tr>
     <td id="header" colspan="2">
       Logged in as: <?php echo $_SESSION["username"]; ?>
-      <a href="https://swe.umbc.edu/~nkatz1/Project2/html/forms/first_page.html"><button id="logout">Logout</button></a>
+      <a href="../../html/forms/first_page.html"><button id="logout">Logout</button></a>
     </td>
   </tr>
   <tr>
     <td id="nav">
-      <a href="https://swe.umbc.edu/~nkatz1/Project2/php/view/advisor_view.php" class="nav_links"><p class="nav_links">View Appointments</p></a>
-      <a href="https://swe.umbc.edu/~nkatz1/Project2/html/forms/add_appointment.php" class="nav_links"><p class="nav_links">Add Appointment</p></a>
+      <a href="../../php/view/advisor_view.php" class="nav_links"><p class="nav_links">View Appointments</p></a>
+      <a href="../../html/forms/add_appointment.php" class="nav_links"><p class="nav_links">Add Appointment</p></a>
       <a href="#" class="nav_links"><p class="nav_links">Make Reports</p></a>
       <a href="#" class="nav_links"><p class="nav_links">Remove Appointment</p></a>
     <div id="fillRest">
