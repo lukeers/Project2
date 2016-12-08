@@ -16,12 +16,12 @@ function RegistrationChange(value)
 <link rel="import" href="../header.html")>
 <link rel='stylesheet' type='text/css' href='../../css/style.css'/>
 
-	
+
 <!-- Test -->
 
 <!-- Code -->
 	<div class="main">
-	
+
 	<div class="switch">
 		<button value="Student" class="button" onclick="RegistrationChange(this.value)">Student</button>
 		<button value="Advisor" class="button" onclick="RegistrationChange(this.value)">Advisor</button>
@@ -29,7 +29,7 @@ function RegistrationChange(value)
 
 <!-- Advisor Page -->
 	<div id="AdvisorRegistration" style="display:none">
-	
+
 		<h1>Advisor Registration</h1>
 			<table><form name="advisorform" method=post action='../../php/validate/validate_advisor.php' onsubmit="return validateAdvisorForm();">
 				<!-- Gets information from the potential advisor, username, first name, last name -->
@@ -43,13 +43,13 @@ function RegistrationChange(value)
 			</form></table>
 		<!-- Hyperlink to the login advisor page -->
 		<p>Already signed up? Click <a href = "login_advisor.html">here</a> to log in.</p>
-	
+
 	</div>
-	
+
 
 <!--Student Page -->
 	<div id="StudentRegistration">
-		
+
 		<h1>Student Registration</h1>
 			<table><form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateStudentForm();">
 				<!-- Gets information from the potential student, username, major -->
@@ -75,22 +75,20 @@ function RegistrationChange(value)
 			<p><tr><td><br><input type=submit id="submit" class="button" value="Submit"/></td></tr></p>
 
 			</form></table>
-	
-    	<!-- Hyperlink to the login student page -->
-		<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
-	
+
+
 		<script>
 			function validateStudentForm(){
 				var x = document.forms["studentform"];
 				var isValid = true;
-		
+
 				//Checks if student ID is two letters and 5 numbers
 				if(!/^[A-Za-z]{2}\d{5}$/g.test(x.studentID.value)){
 					x.studentID.style.borderColor = "red";
 					document.getElementById("idErr").innerHTML = "Invalid student ID.";
 					isValid = false;
 				}
-				
+
 				//Checks to see if email is a UMBC email
 				if(!/^\w+@umbc\.edu$/g.test(x.email.value)){
 					x.email.style.borderColor = "red";
@@ -99,11 +97,19 @@ function RegistrationChange(value)
 				}
 				return isValid;
 			}
-			
+
+
 			function validateAdvisorForm() {
 				var x = document.forms["advisorform"];
 				var isValid = true;
-			
+
+
+
+			function validateAdvisorForm() {
+				var x = document.forms["advisorform"];
+				var isValid = true;
+
+
 				//Checks if password is atleast 6 characters long
 				if(x.password.value.length < 6) {
 					x.password.style.borderColor = "red";
@@ -112,11 +118,10 @@ function RegistrationChange(value)
 				}
 				return isValid;
 			}
-			
+
 		</script>
-		
+
 	</div>
 	</div>
-	
+
 <link rel="import" href="../footer.html")>
-	

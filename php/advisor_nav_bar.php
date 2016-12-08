@@ -26,11 +26,9 @@ p.nav_links:hover
 }
 .top_container
 {
-
 }
 .bottom_container
 {
-
 }
 .swapView
 {
@@ -69,7 +67,6 @@ p.nav_links:hover
   height: auto;
   vertical-align: bottom;
 }
-
 </style>
 
 <body>
