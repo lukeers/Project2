@@ -31,13 +31,14 @@ function RegistrationChange(value)
 	<div id="AdvisorRegistration" style="display:none">
 	
 		<h1>Advisor Registration</h1>
-			<form method=post action='../../php/validate/validate_advisor.php'>
+			<form name="advisorform" method=post action='../../php/validate/validate_advisor.php' onsubmit="return validateAdvisorForm();">
 				<!-- Gets information from the potential advisor, username, first name, last name -->
-				<p>Username: <input type=text name="username"/></p>
-				<p>First Name: <input type=text name="fName"/></p>
-				<p>Last Name: <input type=text name="lName"/></p>
-				<p>Password: <input type=text name="password"/></p>
-				<p>Office: <input type=text name="office"/></p>
+				<p>Username: <input type=text name="username" required/></p>
+				<p>First Name: <input type=text name="fName" required/></p>
+				<p>Last Name: <input type=text name="lName" required/></p>
+				<p>Password: <input type=text name="password" required/></p>
+				<p id="passErr"></p>
+				<p>Office: <input type=text name="office" required/></p>
 				<p><input type=submit id="submit" class="button" value="Submit"/></p>
 			</form>
 		<!-- Hyperlink to the login advisor page -->
@@ -50,7 +51,7 @@ function RegistrationChange(value)
 	<div id="StudentRegistration">
 		
 		<h1>Student Registration</h1>
-			<form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateForm();">
+			<form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateStudentForm();">
 				<!-- Gets information from the potential student, username, major -->
 				<p>First Name: <input type=text name="firstName" required/></p>
 				<p>Last Name: <input type=text name="lastName" required/></p>
@@ -80,16 +81,18 @@ function RegistrationChange(value)
 		<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
 	
 		<script>
-			function validateForm(){
+			function validateStudentForm(){
 				var x = document.forms["studentform"];
 				var isValid = true;
 		
+				//Checks if student ID is two letters and 5 numbers
 				if(!/^[A-Za-z]{2}\d{5}$/g.test(x.studentID.value)){
 					x.studentID.style.borderColor = "red";
 					document.getElementById("idErr").innerHTML = "Invalid student ID.";
 					isValid = false;
 				}
 				
+				//Checks to see if email is a UMBC email
 				if(!/^\w+@umbc\.edu$/g.test(x.email.value)){
 					x.email.style.borderColor = "red";
 					document.getElementById("emailErr").innerHTML = "Invalid student email.";
@@ -97,6 +100,20 @@ function RegistrationChange(value)
 				}
 				return isValid;
 			}
+			
+			function validateAdvisorForm() {
+				var x = document.forms["advisorform"];
+				var isValid = true;
+			
+				//Checks if password is atleast 6 characters long
+				if(x.password.value.length < 6) {
+					x.password.style.borderColor = "red";
+					document.getElementById("passErr").innerHTML = "Password must be at least 6 characters long.";
+					isValid = false;
+				}
+				return isValid;
+			}
+			
 		</script>
 		
 	</div>

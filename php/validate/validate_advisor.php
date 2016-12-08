@@ -22,6 +22,8 @@ while($username = mysql_fetch_array($rs))
   }
 }
 
+<<<<<<< HEAD
+=======
 //Username left blank check
 if ($_POST['username'] == "")
 {
@@ -50,6 +52,7 @@ if ($_POST['office'] == "")
     $error_message .= "Office field can't be blank.<br>";
   }
 
+>>>>>>> advisor-password-work
 if ($errors != True)
 {
   //No errors - GOOD - Insert into database
@@ -59,8 +62,12 @@ if ($errors != True)
   session_start();
   $_SESSION['username'] = $_POST['username'];
 
+<<<<<<< HEAD
   $hashedPassword = sha1($_POST['password']);
 
+=======
+  $hashedPassword = crypt($_POST['password'],"CRYPT_BLOWFISH");
+>>>>>>> advisor-password-work
 
 
   $sql = "INSERT INTO advisorpasswords (username, password) VALUES ('" . $_POST['username']. "' , '" . $hashedPassword . "')";

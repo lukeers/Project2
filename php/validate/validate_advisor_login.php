@@ -37,7 +37,7 @@ if($name_found) {
 }
 
 // This is the pass case
-if ($name_found && $password)
+if ($name_found && $password_match)
 {
   session_start();
   $_SESSION['username'] = $_POST['entered_username'];

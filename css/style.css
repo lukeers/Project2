@@ -1,54 +1,46 @@
+html{ 
+    background-image: url("images/truegrit_background.jpg");
+    background-position: right top;
+}
 
-	
-	html{ 
-		background-image: url("images/truegrit_background.jpg");
-		background-repeat: no repeat;
-		background-position: right top;
-		background-attachment: fixed;
-    }
-	
-	.main {
-		color: #000; 
-		background-color: white; 
-		margin: 100px auto; 
-		padding: 20px 20px 20px; 
-		position: relative; 
-		width: 600px; 
-		border-width: 2px;
-		border-radius: 10px;
-		
-	}
-	
-	p {
-		font-size: 15px;
-		padding-left: 10px
-	}
-	
-	h1 {
-		font-size: 30px;
-	}
-	
-	.switch {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	
-	.switch .button {
-		background-color: grey;
-		color: white;
-		font-size: 20px;
-		text-align: center;
-		border-radius: 5px;
-		padding: 10px 15px;
-		
-	}
-	
-	#submit.button {
-		background-color: #66AA44;
-		color: white;
-		text-align: center;
-		border-radius: 5px;
-		padding: 5px 10px;
-		
-	}
+.main {
+    color: black; 
+    background-color: white; 
+    margin: 140px auto; 
+    padding: 20px 20px 20px;
+	position: relative;	
+    width: 600px; 
+    border-width: 4px;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+h1 {
+   font-family: "arial"; 
+   font-size: 30px;
+}
+
+.switch {
+    display: block;
+    text-align: center;
+	border-bottom: thin solid;
+}
+
+.switch .button {
+    background-color: LightGrey;
+	padding: 10px 15px;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+#submit.button {
+    background-color: #66AA44;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 10px;
+    
+}
