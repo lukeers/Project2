@@ -25,8 +25,6 @@ if ($errors != True)
   $fullName = $_POST['fName'] . " " . $_POST['lName'];
   $sql = "INSERT INTO advisors (username, fullName, Office) VALUES (\"" . $_POST['username'] . "\" , \"" . $fullName . "\", \"" . $_POST['office'] . "\")";
   $rs = mysql_query($sql, $conn);
-  session_start();
-  $_SESSION['username'] = $_POST['username'];
   $hashedPassword = sha1($_POST['password']);
   $sql = "INSERT INTO advisorpasswords (username, password) VALUES ('" . $_POST['username']. "' , '" . $hashedPassword . "')";
   $rs = mysql_query($sql, $conn);
@@ -34,6 +32,7 @@ if ($errors != True)
 }
 else
 {
-  require('../../html/error_forms/register_advisor_error.html');
+  $_session['error_message'] = $error_message;
+  require('../../html/forms/register_advisor.php');
 }
 ?>

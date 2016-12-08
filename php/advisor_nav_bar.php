@@ -57,7 +57,7 @@ p.nav_links:hover
 #content
 {
   text-align: center;
-  vertical-align: top;
+  vertical-align: middle;
 }
 #fillRest
 {
@@ -76,11 +76,13 @@ p.nav_links:hover
   }
   ?>
   
+  <?php echo(session_status()); ?>
+  <?php echo($_SESSION['username']); ?>
 <table class="navigation_bars">
   <tr>
     <td id="header" colspan="2">
       Logged in as: <?php echo $_SESSION["username"]; ?>
-      <a href="../../html/forms/main_login.html"><button id="logout">Logout</button></a>
+      <a href="../../html/forms/first_page.html"><button id="logout">Logout</button></a>
     </td>
   </tr>
   <tr>
@@ -89,6 +91,8 @@ p.nav_links:hover
       <a href="../../html/forms/add_appointment.php" class="nav_links"><p class="nav_links">Add Appointment</p></a>
       <a href="#" class="nav_links"><p class="nav_links">Make Reports</p></a>
       <a href="#" class="nav_links"><p class="nav_links">Remove Appointment</p></a>
+      <a href="../../html/forms/register_advisor.php" class="nav_links"><p class="nav_links">Register Advisor</p></a>
+
     <div id="fillRest">
       <a class="nav_links"><p name="Show Self" class="nav_links">Show All Advisors</p></a>
     </div>
