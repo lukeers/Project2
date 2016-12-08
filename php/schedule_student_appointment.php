@@ -11,87 +11,65 @@ File Call/Redirect
 include ('../html/header.html');
 include ('mysql_connect.php');
 ?>
-
+<a href='view/student_view.php'><button>&#8592;</button></a>
 <h1>Schedule an appointment </h1>
-    <form method=post action="get_appointments.php">
-  <p><label>Type of Meeting?<br></label>
+<form method=post action="get_appointments.php">
+  <p><b>Type of Meeting:<br></b>
     <!-- value is passed to function where it shows and hides respectively -->
+    <input type="radio" name="typeMeeting" id="BothMeetings" value="all" onclick="radioToggle(this)" checked>Either
     <input type="radio" name="typeMeeting" id="GroupMeeting" value="group1" onclick="radioToggle(this)">Group
     <input type="radio" name="typeMeeting" id="IndividMeeting" value="group0" onclick="radioToggle(this)">Individual
-    <input type="radio" name="typeMeeting" id="BothMeetings" value="all" onclick="radioToggle(this)" checked>Either
   </p>
-  <p id="IndividOption">
-    Advisor<br>
-    <?php
+  <p id="IndividOption"><b>
+    Advisor:</b><br>
+  <?php
     //Add advisors names and username
-    //<input type='checkbox' onchange='toggleCheckbox(this)' value=" .  . " checked>Ms. Michelle Bulger
-     ?>
-
-    <input type="checkbox" onchange="toggleCheckbox(this)" checked>Mrs. Julie Crosby
-    <input type="checkbox" onchange="toggleCheckbox(this)" checked>Ms. Christine Powers
-    <input type="checkbox" onchange="toggleCheckbox(this)" checked>CNMS Advisors
-  </p>
-  <p id="groupOption">Day:<br>
+    $sql = "Select Username, fullName from advisors";
+    $rs = mysql_query($sql, $conn);
+    while($advisorsInfo = mysql_fetch_array($rs)){
+      echo "<input type='checkbox' onchange='toggleCheckbox(this)' value='" . $advisorsInfo['Username'] . "' checked>" . $advisorsInfo['fullName'];
+    }
+  ?>
+   </p>
+   <!-- Day Options -->
+   <p id="groupOption"><b>Day:</b><br>
     <input type="checkbox" onchange="toggleCheckbox(this)" value="Mon" checked>Mon
     <input type="checkbox" onchange="toggleCheckbox(this)" value="Tue" checked>Tues
     <input type="checkbox" onchange="toggleCheckbox(this)" value="Wed" checked>Wed
     <input type="checkbox" onchange="toggleCheckbox(this)" value="Thurs" checked>Thurs
     <input type="checkbox" onchange="toggleCheckbox(this)" value="Fri" checked>Fri
   </p>
-	<h3>When would you like to schedule the appointment?</h3>
-	<p>Choose Week: <select name="week"/>
-	<option value = 0 selected>this week</option>
-	<option value = 1> next week</option>
 
-	<!-- THIS CODE GETS THE NEXT TWO WEEK OPTIONS -->
-	<?php
-        // Set time zone to the east coast
-	date_default_timezone_set('America/New_York');
-	$date = date_create(); // Today
-	$daysToSunday = (7 - date_format($date, 'w')) % 7;
-	$nextSunday = date_modify($date, "+$daysToSunday day");
-	$newSunday = date_modify($nextSunday, '+7 day');
-	echo "<option value = 2>week of ";
-	$string = date_format($newSunday, 'l, M. j');
-        echo $string;
-	echo " </option> ";
-	$newSunday2 = date_modify($newSunday, '+7 day');
-	echo "<option value = 3>week of ";
-        $string2 = date_format($newSunday2, 'l, M. j');
-        echo $string2;
-	echo " </option> ";
-	?>
-	<!-- END PHP -->
-	</select>
-	</p>
-
-    <p>Group?
-	<select name="group">
-	  <option value=1>Yes</option>
-	  <option value=0>No</option>
-	  <option value=2 selected>Don't care</option>
-		</select>
-	</p>
-    <p><input type=submit value="Submit"/></p>
-    </form>
-    <!-- HyperLink to search appointments by advisor -->
-    <p><a href = "search_advisor.php"> Or Look Up By Advisor </a></p>
-
+    <table>
+      <th class='appointContent'>Advisor</th>
+      <th class='appointContent'>Date</th>
+      <th class='appointContent'>Time</th>
+      <th class='appointContent'>Location</th>
+      <th class='appointContent'>Size</th>
+    </th>
     <?php
-      $sql = "SELECT * FROM appointments";
+      $todayTimeStamp = strtotime("now");
+      $sql = "SELECT * FROM appointments WHERE Date>='" . date("Y-m-d", $todayTimeStamp) . "' ORDER BY Date ASC, Time ASC";
       $rs = mysql_query($sql, $conn);
       while ($appoint = mysql_fetch_array($rs))
       {
         //Add group_YN to the class
-        echo "<div class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "' >";
-        echo "<span class='appointContent'>" . $appoint['Advisor'] . "</span>";
-        echo "<span class='appointContent'>" . $appoint['Date'] . "</span>";
+        //echo "<button type='submit' class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "' >";
+        echo "<tr class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "' >";
+        echo "<td class='appointContent'>" . $appoint['Advisor'] . "</td>";
+        echo "<td class='appointContent'>" . date("D, M j", strtotime($appoint['Date'])) . "</td>";
         $appointmentTime = strtotime($appoint['Time']);
         $EndAppointTime = strtotime("+30 minutes", $appointmentTime);
-        echo "<span class='appointContent'>" . date("g:ia", $appointmentTime) . "-" . date("g:ia", $EndAppointTime) . "</span>";
-        echo "</div>";
-        echo "<br class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "'>";
+        echo "<td class='appointContent'>" . date("g:ia", $appointmentTime) . " - " . date("g:ia", $EndAppointTime) . "</td>";
+        echo "<td class='appointContent'>" . $appoint['Location'] . "</td>";
+        echo "<td class='appointContent'>" . $appoint['NumStudents'] . "</td>";
+        echo "<td class='appointContent'><form class='appointForm' action='table_handler.php' method='post'>";
+        echo "<button type='submit' name='ID' value='" . $appoint['id'] . "'>Register</button>";
+        echo "</form></td>";
+        echo "</tr>";
+        //echo "<br class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "'>";
       }
+
      ?>
 
 <?php include ('../html/footer.html'); ?>
@@ -102,14 +80,12 @@ include ('mysql_connect.php');
 function toggleCheckbox(element)
 {
   appointElements = document.getElementsByClassName(element.value);
-  appointElements = document.getElementsByClassName("Wed");
   console.log(element.value);
   console.log(appointElements.length);
   for(i = 0 ; i < appointElements.length ; i++)
   {
-    if(element.checked == true)
-    {
-      appointElements[i].style.display = "inline-block";
+    if(element.checked == true){
+      appointElements[i].style.display = "table-row";
     }
     else {
       appointElements[i].style.display = "none";
@@ -123,14 +99,14 @@ function radioToggle(element)
     appointElements = document.getElementsByClassName('appointList');
     for(i = 0 ; i < appointElements.length ; i++)
     {
-      appointElements[i].style.display = "inline-block";
+      appointElements[i].style.display = "table-row";
     }
   }
   else if(element.value === "group1"){
     appointElements = document.getElementsByClassName(element.value);
     for(i = 0 ; i < appointElements.length ; i++)
     {
-      appointElements[i].style.display = "inline-block";
+      appointElements[i].style.display = "table-row";
     }
     appointElements = document.getElementsByClassName('group0');
     for(i = 0 ; i < appointElements.length ; i++)
@@ -142,7 +118,7 @@ function radioToggle(element)
     appointElements = document.getElementsByClassName(element.value);
     for(i = 0 ; i < appointElements.length ; i++)
     {
-      appointElements[i].style.display = "inline-block";
+      appointElements[i].style.display = "table-row";
     }
     appointElements = document.getElementsByClassName('group1');
     for(i = 0 ; i < appointElements.length ; i++)
@@ -154,36 +130,60 @@ function radioToggle(element)
 </script>
 
 <style>
+input[type='checkbox']
+{
+  margin: 3px 2px 3px 6px;
+}
+h1
+{
+  margin-top: 0px;
+}
+table{
+  border-collapse: separate;
+  border-spacing: 0px 5px;
+}
 .appointList
 {
-  display: inline-block;
-  border: 1px black solid;
-  padding: 5px;
-  margin: 5px 0px;
+  margin: 3px 0px;
+  border-radius: 10px;
 }
 .appointList:hover
 {
-  background-color: beige;
+  background-color: darkgray;
 }
-.appointList:nth-of-type(even)
+.appointList:nth-child(even)
 {
   background-color: lightgray;
 }
-.appointList:nth-of-type(even):hover
+.appointList:nth-child(even):hover
 {
-  background-color: beige;
+  background-color: darkgray;
 }
 .appointContent
 {
-  padding: 5px 6px;
-  border-right: 1px solid black;
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  padding: 2px 9px;
+}
+.appointContent:nth-child(even)
+{
+  border-left: none;
+  border-right: none;
 }
 .appointContent:last-child
 {
-  border-right: 0px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-right: 1px black solid;
 }
-.appointContent:nth-child(1)
+.appointContent:first-child
 {
-  max-width: 200px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+.appointForm
+{
+  margin: 0px;
 }
 </style>

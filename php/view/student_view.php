@@ -22,14 +22,14 @@ top:8px;
 </head>
 <body>
 
-<?php 
+<?php
 require_once('../mysql_connect.php');
 session_start();
 
 // Set timezone to the east coast
 date_default_timezone_set('America/New_York');
 
-// Get all info about advisors 
+// Get all info about advisors
 $sql = "SELECT * FROM advisors WHERE 1";
 $rs = mysql_query($sql, $conn);
 
@@ -38,12 +38,12 @@ if(mysql_fetch_array($rs))
   //Getting Appointment Number
   $sql = "SELECT Appt FROM students WHERE studentID=\"" . $_SESSION['studentID'] . "\"";
   $rs = mysql_query($sql, $conn);
-  
-  $sqlRow = mysql_fetch_array($rs);
-  $studentApptNum = $sqlRow['Appt']; 
 
-  echo "Logged in as: " . $_SESSION['studentID']; 
-  echo  "<pre>  <a href = \"../../html/forms/first_page.html\">Log Me Out</a></pre>";
+  $sqlRow = mysql_fetch_array($rs);
+  $studentApptNum = $sqlRow['Appt'];
+
+  echo "Logged in as: " . $_SESSION['studentID'];
+  echo  "<pre>  <a href = \"../../html/forms/main_login.php\">Log Me Out</a></pre>";
 ?>
 
 <?php if($studentApptNum) { ?>
@@ -58,17 +58,18 @@ if(mysql_fetch_array($rs))
 <th>#Students</th>
 </tr>
 
-<?php } 
+<?php }
 
-require_once('../mysql_connect.php'); 
+require_once('../mysql_connect.php');
+
 
 //Showing the students appointment
-$sql = "SELECT * FROM appointments WHERE id=\"" . $studentApptNum . "\" ORDER BY Date ASC, Time ASC";
+$sql = "SELECT * FROM appointments WHERE id='" . $studentApptNum . "' ORDER BY Date ASC, Time ASC";
 $rs = mysql_query($sql, $conn);
 
 $appt = mysql_fetch_array($rs);
 
-// Print out the student's appointment 
+// Print out the student's appointment
 if($appt)
 {
   echo "<tr>";
@@ -76,8 +77,8 @@ if($appt)
   echo "<td>" . date("g:ia", strtotime($appt['Time'])) . "</td>";
   echo "<td>" . $appt['Advisor'] . " (" .$appt['AdvisorUsername'] . ")</td>";
   echo "<td>" . $appt['Location'] . "</td>";
-  
-  // Check if the appointment is a group or not 
+
+  // Check if the appointment is a group or not
   if($appt['isGroup'] == 0)
 	echo "<td>" . "No" . "</td>";
   else
@@ -87,7 +88,7 @@ if($appt)
   echo "</tr>";
 }
 
-// If the user has not appointment currently scheduled 
+// If the user has not appointment currently scheduled
 else
 {
   echo "<h3>No appointment scheduled</h3>";
@@ -99,21 +100,21 @@ else
 if ( $studentApptNum )
 {
   $_SESSION['appt'] = $studentApptNum;
-  // Print a button to cancel the student appointment 
+  // Print a button to cancel the student appointment
   echo '<form method=post action="../cancel_student_appointment.php">';
   echo '<input type=submit value="Cancel Appointment"/>';
   echo '</form>';
 }
 else
 {
-  // Print a button to schedual an appointment 
+  // Print a button to schedual an appointment
   echo '<form method=post action="../schedule_student_appointment.php">';
   echo '<input type=submit value="Schedule Appointment"/>';
   echo '</form>';
 }
 ?>
 
-<?php } 
+<?php }
 //handles the case if no advisors have made an appointment
 else
 {
