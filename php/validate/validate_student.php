@@ -4,7 +4,7 @@
 <?php
 require_once('../mysql_connect.php');
 // Finds all the student IDs from the database
-$sql = "SELECT studentID FROM students WHERE studentID='" . $_POST['studentID'] . "'";
+$sql = "SELECT * FROM students WHERE studentID='" . $_POST['studentID'] . "'";
 $rs = mysql_query($sql, $conn);
 
 
@@ -14,8 +14,6 @@ $error_message = "";
 
 //Loop through student IDs, check for match
 $IDs = mysql_fetch_array($rs);
-
-echo($IDs['firstName']);
 
 if(mysql_num_rows($rs) == 0){
   $sql = "INSERT INTO students (major, email, firstName, lastName, studentID) VALUES (\"" . $_POST['major'] . "\", \"" . $_POST['email'] . "\", \"" . $_POST['firstName'] . "\", \"" . $_POST['lastName'] . "\", \"" . $_POST['studentID'] . "\")";
@@ -28,7 +26,6 @@ else if (strcasecmp($_POST['firstName'], $IDs['firstName']) != 0
     //Match found - BAD - there is an error
     $errors = True;
     $error_message = "User ID already taken<br>";
-    break;
 }
 
 if ($errors != True) 
@@ -38,12 +35,12 @@ if ($errors != True)
   $_SESSION['studentID'] = $_POST['studentID'];
 
   // Go to the student_view.php file
-  //header('Location:../view/student_view.php');
+  header('Location:../view/student_view.php');
 }
 else
 {
   // Go to the main_login.html file
   echo($error_message);
- // require('../../html/forms/main_login.html');
+  require('../../html/forms/main_login.html');
 }
 ?>
