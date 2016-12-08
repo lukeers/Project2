@@ -57,7 +57,7 @@ p.nav_links:hover
 #content
 {
   text-align: center;
-  vertical-align: middle;
+  vertical-align: top;
 }
 #fillRest
 {
@@ -71,18 +71,14 @@ p.nav_links:hover
 
 <body>
   <?php
-  if (session_status() == PHP_SESSION_NONE) {
-      session_start();
-  }
+  session_start();
   ?>
-  
-  <?php echo(session_status()); ?>
-  <?php echo($_SESSION['username']); ?>
+
 <table class="navigation_bars">
   <tr>
     <td id="header" colspan="2">
       Logged in as: <?php echo $_SESSION["username"]; ?>
-      <a href="../../html/forms/first_page.html"><button id="logout">Logout</button></a>
+      <a href="../../html/forms/main_login.html"><button id="logout">Logout</button></a>
     </td>
   </tr>
   <tr>
