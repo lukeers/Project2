@@ -76,8 +76,6 @@ function RegistrationChange(value)
 
 			</form></table>
 
-    	<!-- Hyperlink to the login student page -->
-		<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
 
 		<script>
 			function validateStudentForm(){
@@ -100,9 +98,17 @@ function RegistrationChange(value)
 				return isValid;
 			}
 
+
 			function validateAdvisorForm() {
 				var x = document.forms["advisorform"];
 				var isValid = true;
+
+
+
+			function validateAdvisorForm() {
+				var x = document.forms["advisorform"];
+				var isValid = true;
+
 
 				//Checks if password is atleast 6 characters long
 				if(x.password.value.length < 6) {

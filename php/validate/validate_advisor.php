@@ -18,6 +18,7 @@ while($username = mysql_fetch_array($rs))
     $error_message = "Username already taken<br>";
   }
 }
+
 if ($errors != True)
 {
   //No errors - GOOD - Insert into database

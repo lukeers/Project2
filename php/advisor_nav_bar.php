@@ -75,7 +75,7 @@ p.nav_links:hover
       session_start();
   }
   ?>
-
+  
 <table class="navigation_bars">
   <tr>
     <td id="header" colspan="2">
