@@ -3,14 +3,11 @@
 
 <?php
 require_once('../mysql_connect.php');
-
 $sql = "SELECT username FROM advisors";
 $rs = mysql_query($sql, $conn);
-
 //By default no errors
 $errors = False;
 $error_message = "";
-
 //Loop through usernames, check for match
 while($username = mysql_fetch_array($rs))
 {
@@ -21,38 +18,6 @@ while($username = mysql_fetch_array($rs))
     $error_message = "Username already taken<br>";
   }
 }
-
-<<<<<<< HEAD
-=======
-//Username left blank check
-if ($_POST['username'] == "")
-{
-    $errors = True;
-    $error_message .= "Username field can't be blank.<br>";
-}
-
-//First name left blank check
-if ($_POST['fName'] == "")
-{
-    $errors = True;
-    $error_message .= "First name field can't be blank.<br>";
-}
-
-//Last name left blank check
-if ($_POST['lName'] == "")
-{
-    $errors = True;
-    $error_message .= "Last name field can't be blank.<br>";
-}
-
-//office left blank
-if ($_POST['office'] == "")
-  {
-    $errors = True;
-    $error_message .= "Office field can't be blank.<br>";
-  }
-
->>>>>>> advisor-password-work
 if ($errors != True)
 {
   //No errors - GOOD - Insert into database
@@ -61,23 +26,11 @@ if ($errors != True)
   $rs = mysql_query($sql, $conn);
   session_start();
   $_SESSION['username'] = $_POST['username'];
-
-<<<<<<< HEAD
   $hashedPassword = sha1($_POST['password']);
-
-=======
-  $hashedPassword = crypt($_POST['password'],"CRYPT_BLOWFISH");
->>>>>>> advisor-password-work
-
-
   $sql = "INSERT INTO advisorpasswords (username, password) VALUES ('" . $_POST['username']. "' , '" . $hashedPassword . "')";
   $rs = mysql_query($sql, $conn);
-
-
   header('Location:../../php/view/advisor_view.php');
 }
-
-
 else
 {
   require('../../html/error_forms/register_advisor_error.html');

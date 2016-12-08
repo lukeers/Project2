@@ -19,15 +19,19 @@ td {
 text-align:center;
 vertical-align:middle;
 }
-/*
-form {
-position:relative;
-top:8px;
+h3
+{
+  margin: 0px
 }
-*/
-#list_view
+#CheckBoxContainer
+{
+  margin: 1px 0px;
+}
+/* Calendar View Style */
+.list_view
 {
   display: none;
+  margin-top: 10px;
 }
 #calendar_view
 {
@@ -35,7 +39,7 @@ top:8px;
 }
 #td_dayOfWeek
 {
-  width: 125px;
+  min-width: 140px;
   text-align: center;
 }
 table#calendar_view th
@@ -55,12 +59,67 @@ table#calendar_view th
 {
   height: 5px;
 }
+/* Container for buttons */
 .appointmentButton
 {
   border-top: 1px black dotted;
   padding-top: 5px;
   text-align: center;
-  min-height: 79px;
+  height: 132px;
+  overflow: auto;
+}
+#calendar_view button.userButton, #calendar_view button.otherUserButton
+{
+  border-radius: 7px;
+  border: 1px black solid;
+  margin: 1px;
+  min-width: 135px;
+}
+/* End of Calendar View Style */
+
+/* List View Style */
+.list_view form
+{
+  height: 0px;
+}
+.list_view tr
+{
+  height: 25px;
+}
+/* End of List View Style */
+.userRow, .userButton, .userButtonColor
+{
+  background-color: palegreen;
+}
+.otherUserRow, .otherUserButton, .otherUserButtonColor
+{
+  background-color: lightblue;
+}
+#CheckBoxStyle.otherUserButtonColor
+{
+  margin-left: 80px;
+}
+
+#CheckBoxStyle
+{
+  -webkit-appearance: none;
+  border: 1px black solid;
+  padding: 5px;
+  margin: 0px 2px;
+  border-radius: 5px;
+  position: relative;
+}
+#CheckBoxStyle:focus
+{
+  outline: none;
+}
+#CheckBoxStyle:checked:after
+{
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  top: -6px;
+  left: 1px;
 }
 </style>
 </head>
@@ -68,9 +127,6 @@ table#calendar_view th
 
 <?php
 require_once('../mysql_connect.php');
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
 // set the timezone to the east coast
 date_default_timezone_set('America/New_York');
@@ -97,7 +153,7 @@ if(date("D",$recordTime) == "Sat" || date("D",$recordTime) == "Sun")
 // end calendar preparation
 
 //Fetching appointments
-$sql = "SELECT * FROM appointments WHERE AdvisorUsername=\"" . $_SESSION['username'] . "\" ORDER BY Date ASC, Time ASC";
+$sql = "SELECT * FROM appointments ORDER BY Date ASC, Time ASC";
 $rs = mysql_query($sql, $conn);
 
 // Includes the navigation bar
@@ -105,37 +161,66 @@ include "../advisor_nav_bar.php";
 
 $appt = mysql_fetch_array($rs);
 $storage_array = array($appt);
+//Used to store appoints in the past
+$old_appointments = array();
+//Used to store individual appointments
+$catch_case_appointments = array();
+
 // Prints out the titles of the table
 if($appt)
 {
   //Buttons for the two views
-  echo "<div class='top_container'><h3>Scheduled Appointments<br>";
-  echo "<button class='swapView' id='showTable' onclick='showTableButton()'>Table View</button><button class='swapView' id='showList' onclick='showListButton()'>List View</button></h3></div>";
+  echo "<div class='top_container'>";
+  echo "<h3>Scheduled Appointments<br>";
+  echo "<button class='swapView' id='showTable' onclick='showTableButton()'>Table View</button>";
+  echo "<button class='swapView' id='showList' onclick='showListButton()'>List View</button></h3>";
+  echo "<p id='CheckBoxContainer'><input type='checkbox' id='CheckBoxStyle' class='userButtonColor' onchange='toggleCheckbox(this)' value='user' checked>My Appointments";
+  echo "<input type='checkbox' id='CheckBoxStyle' class='otherUserButtonColor' onchange='toggleCheckbox(this)' value='otherUser' checked>Other Appointments</p>";
+  echo "</div>";
+
+  //Table starting
   echo "<div class='bottom_container'>";
-  echo "<table id='list_view'>";
+  echo "<table class='list_view'>";
+  echo "<tr><th colspan='6'>Group Appointments</th></tr>";
   echo "<tr>";
+  echo "<th>Advisor</th>";
   echo "<th>Date</th>";
   echo "<th>Time</th>";
   echo "<th>Location</th>";
-  echo "<th>Group</th>";
   echo "<th>#Students</th>";
   echo "<th>View Registered Students</th>";
   echo "</tr>";
 
   // Now this cycles through the section of the query
   while ($appt) {
-    echo "<tr>";
+    //Sorts into past appointments and future
+    if(strtotime($appt['Date']) < strtotime("Now"))
+    {
+      array_push($old_appointments, $appt);
+      array_push($storage_array,$appt);
+      $appt = mysql_fetch_array($rs);
+      continue;
+    }
+    if($appt['isGroup'] == 0)
+    {
+      array_push($catch_case_appointments, $appt);
+      array_push($storage_array,$appt);
+      $appt = mysql_fetch_array($rs);
+      continue;
+    }
+    //Returns 0 if they are equal (doesn't look at case)
+    if(!strcasecmp($_SESSION['username'] , $appt['AdvisorUsername']))
+    {
+      echo "<tr class='userRow'>";
+    }
+    else
+    {
+      echo "<tr class='otherUserRow'>";
+    }
+    echo "<td>" . $appt['Advisor'] . "</td>";
     echo "<td>" . $appt['Date'] . "</td>";
     echo "<td>" . date("g:ia", strtotime($appt['Time'])) . "</td>";
     echo "<td>" . $appt['Location'] . "</td>";
-
-    // check if the appointment is a group appointment or not
-    if($appt['isGroup'] == 0)
-      echo "<td>" . "No" . "</td>";
-    else
-      // not a group appointment
-      echo "<td>" . "Yes" . "</td>";
-
     echo "<td>" . $appt['NumStudents'] . "</td>";
 
     $apptID = $appt['id'];
@@ -167,7 +252,113 @@ if($appt)
   echo "</tr>";
   $appt = mysql_fetch_array($rs);
   array_push($storage_array,$appt);
-}
+} // End the table printing loop
+  echo "</table><br class='list_view'>";
+
+  //Printing individual appointments
+  echo "<table class='list_view'>";
+  echo "<tr><th colspan='6'>individual Appointments</th></tr>";
+  echo "<tr>";
+  echo "<th>Advisor</th>";
+  echo "<th>Date</th>";
+  echo "<th>Time</th>";
+  echo "<th>Location</th>";
+  echo "<th>#Students</th>";
+  echo "<th>View Registered Students</th>";
+  echo "</tr>";
+  for($i = 0 ; $i < count($catch_case_appointments) ; $i++)
+  {
+    //Returns 0 if they are equal (doesn't look at case)
+    if(!strcasecmp($_SESSION['username'] , $catch_case_appointments[$i]['AdvisorUsername']))
+    {
+      echo "<tr class='userRow'>";
+    }
+    else
+    {
+      echo "<tr class='otherUserRow'>";
+    }
+    echo "<td>" . $catch_case_appointments[$i]['Advisor'] . "</td>";
+    echo "<td>" . $catch_case_appointments[$i]['Date'] . "</td>";
+    echo "<td>" . date("g:ia", strtotime($catch_case_appointments[$i]['Time'])) . "</td>";
+    echo "<td>" . $catch_case_appointments[$i]['Location'] . "</td>";
+    echo "<td>" . $catch_case_appointments[$i]['NumStudents'] . "</td>";
+    // Print out the check students button if there are students signed up for the appointment
+    if ($catch_case_appointments[$i]['NumStudents'] > 0)
+    {
+      echo "<td>";
+      echo "<form method=post action='view_students.php'>";
+      echo "<input type=hidden name='ID' value='" . $catch_case_appointments[$i]['id'] . "'>";
+      echo "<input type=submit value='View Registered Students'>";
+      echo "</form>";
+      echo "</td>";
+    }
+    // If there are not any students signed up then tell the user that
+    else
+    {
+      echo "<td>No Students Registered</td>";
+    }
+    echo "<td><form method=post action='../cancel_advisor_appointment.php'>";
+    echo "<input type=hidden name='ID' value='" . $catch_case_appointments[$i]['id'] . "' />";
+    echo "<input type=submit value='Cancel'/>";
+	  echo "</form></td>";
+    echo "</tr>";
+  }
+  echo "</table><br class='list_view'>";
+
+  //Printing Old Appointment table
+  echo "<table class='list_view'>";
+  echo "<tr><th colspan='7'>Past Appointments</th></tr>";
+  echo "<tr>";
+  echo "<th>Advisor</th>";
+  echo "<th>Date</th>";
+  echo "<th>Time</th>";
+  echo "<th>Location</th>";
+  echo "<th>Group</th>";
+  echo "<th>#Students</th>";
+  echo "<th>View Registered Students</th>";
+  echo "</tr>";
+  for($i = 0 ; $i < count($old_appointments) ; $i++)
+  {
+    //Returns 0 if they are equal (doesn't look at case)
+    if(!strcasecmp($_SESSION['username'] , $old_appointments[$i]['AdvisorUsername']))
+    {
+      echo "<tr class='userRow'>";
+    }
+    else
+    {
+      echo "<tr class='otherUserRow'>";
+    }
+    echo "<td>" . $old_appointments[$i]['Advisor'] . "</td>";
+    echo "<td>" . $old_appointments[$i]['Date'] . "</td>";
+    echo "<td>" . date("g:ia", strtotime($old_appointments[$i]['Time'])) . "</td>";
+    echo "<td>" . $old_appointments[$i]['Location'] . "</td>";
+    //Prints if group appointment
+    if($old_appointments[$i]['isGroup'] == 0)
+    {
+      echo "<td>" . "No" . "</td>";
+    }
+    else
+    {
+      echo "<td>" . "Yes" . "</td>";
+    }
+    echo "<td>" . $old_appointments[$i]['NumStudents'] . "</td>";
+    // Print out the check students button if there are students signed up for the appointment
+    if ($old_appointments[$i]['NumStudents'] > 0)
+    {
+      echo "<td>";
+      echo "<form method=post action='view_students.php'>";
+      echo "<input type=hidden name='ID' value='" . $old_appointments[$i]['id'] . "'>";
+      echo "<input type=submit value='View Registered Students'>";
+      echo "</form>";
+      echo "</td>";
+    }
+    // If there are not any students signed up then tell the user that
+    else
+    {
+      echo "<td>No Students Registered</td>";
+    }
+    echo "</tr>";
+  }
   echo "</table>";
 }
 
@@ -237,6 +428,7 @@ if((date('D',$recordTime) != "Sat") && (date('D',$recordTime) != "Sun"))
 {
   echo("<th>" . date('j',$recordTime));
   echo("<div class='appointmentButton'>");
+  //Function at the bottom
   printAppointments($recordTime, $storage_array);
   echo("</div>");
   //echo("<div class='appointmentButton'><button>11am-12pm | 3/6</button></div>");
@@ -254,23 +446,9 @@ echo("</table>");
 </div>
 </body>
 </html>
-<script>
-list_view
-calendar_view
-function showListButton()
-{
-  document.getElementById('list_view').style.display = "inline-block";
-  document.getElementById('calendar_view').style.display = "none";
-}
-function showTableButton()
-{
-  document.getElementById('calendar_view').style.display = "inline-block";
-  document.getElementById('list_view').style.display = "none";
-}
 
-</script>
+<!-- PHP FUNCTIONS -->
 <?php
-//Functions
 function printAppointments($timeEvaluation, $appointmentArray)
 {
   for($i = 0 ; $i < count($appointmentArray) ; $i++)
@@ -284,9 +462,70 @@ function printAppointments($timeEvaluation, $appointmentArray)
       $appointmentTime = strtotime($appointmentArray[$i]['Time']);
       $EndAppointTime = strtotime("+30 minutes", $appointmentTime);
       $buttonString = date("g:ia", $appointmentTime) . "-" . date("g:ia", $EndAppointTime) . " | " . $appointmentArray[$i]['NumStudents']. "/?";
-      echo("<button value='" . $appointmentArray[$i]['id'] . "'>" . $buttonString . "</button><br>");
+      echo "<form method='post' action='view_students.php'>";
+      //Returns 0 if they are equal (doesn't look at case)
+      if(strcasecmp($_SESSION['username'] , $appointmentArray[$i]['AdvisorUsername']) === 0){
+        echo("<button type='submit' name='ID' class='userButton' value='" . $appointmentArray[$i]['id'] . "'>" . $buttonString . "</button><br>");
+      }
+      else {
+        echo("<button type='submit' name='ID' class='otherUserButton' value='" . $appointmentArray[$i]['id'] . "'>" . $buttonString . "</button><br>");
+      }
+      echo "</form>";
     }
   }
 }
 
  ?>
+
+<script>
+//Button will swap between advisor view of Calendar to the List View
+function showListButton()
+{
+  elements = document.getElementsByClassName('list_view');
+  document.getElementById('calendar_view').style.display = "none";
+  for(i = 0 ; i < elements.length ; i++)
+  {
+    elements[i].style.display = "inline-block";
+  }
+}
+//Button will swap between advisor view of List to the Calendar
+function showTableButton()
+{
+  document.getElementById('calendar_view').style.display = "inline-block";
+  elements = document.getElementsByClassName('list_view');
+  for(i = 0 ; i < elements.length ; i++)
+  {
+    elements[i].style.display = "none";
+  }
+}
+//When checkbox is hit
+function toggleCheckbox(element)
+{
+  appointElements = document.getElementsByClassName(element.value + "Row");
+  console.log("Row:");
+  console.log(appointElements);
+  for(i = 0 ; i < appointElements.length ; i++)
+  {
+    if(element.checked == true)
+    {
+      appointElements[i].style.display = "table-row";
+    }
+    else {
+      appointElements[i].style.display = "none";
+    }
+  }
+  appointElements2 = document.getElementsByClassName(element.value + "Button");
+  console.log("Buttons: ");
+  console.log(appointElements2);
+  for(i = 0 ; i < appointElements2.length ; i++)
+  {
+    if(element.checked == true)
+    {
+      appointElements2[i].style.display = "inline-block";
+    }
+    else {
+      appointElements2[i].style.display = "none";
+    }
+  }
+}
+</script>
