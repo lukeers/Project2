@@ -19,7 +19,7 @@
   color: white;
   font-weight: bolder;
 }
-#displayStudents, #displayStudents th, #displayStudents td {
+#displayStudents th, #displayStudents td:not(.ButtonContainers) {
 border: 1px solid black;
 }
 
@@ -29,10 +29,33 @@ vertical-align:middle;
 padding: 3px 6px;
 }
 
-#displayStudents
+#displayStudents, #meetingInformation
 {
   display: inline-block;
   border-collapse: collapse;
+}
+
+#meetingInformation
+{
+  margin-top: 10px;
+}
+
+#meetingInformation td
+{
+  border: 1px black solid;
+  padding: 3px 5px;
+}
+.addStudentButton
+{
+  float: left;
+  margin-left: 10px;
+}
+.deleteMeetingButton
+{
+  float: right;
+  background-color: darkred;
+  color: white;
+  border-radius: 7px;
 }
 
 </style>
@@ -42,6 +65,21 @@ padding: 3px 6px;
 <?php
 require_once('../mysql_connect.php');
 include "../advisor_nav_bar.php";
+
+//Prints out meeting information
+$sql = "SELECT * FROM appointments WHERE id=" . $_POST['ID'];
+$rs = mysql_query($sql, $conn);
+$appoint = mysql_fetch_array($rs);
+echo "<table id='meetingInformation'>";
+echo "<tr><th colspan='2'>Meeting Information</th></tr>";
+echo "<td>Advisor: " . $appoint['Advisor'] . "</td>";
+echo "<td>Date: " . date('D, F d, Y',strtotime($appoint['Date'])) . " at " . date('g:ia',strtotime($appoint['Date'])) . " - " . date('g:ia',strtotime('+30 minutes', strtotime($appoint['Date']))) . "</td>";
+echo "</tr><tr>";
+echo "<td>Location: " . $appoint['Location'] . "</td>";
+echo "<td>Enrolled in Group: " . $appoint['NumStudents'] . " out of " . " spaces</td>";
+echo "</tr>";
+echo "</table>";
+
 
 // Select all the students that have the selected appointment
 $sql = "SELECT * FROM students WHERE Appt=" . $_POST['ID'];
@@ -83,9 +121,20 @@ if ($student)
     echo "</tr>";
     $student = mysql_fetch_array($rs);
   }
+  //Making option buttons
+  echo "<tr>";
+  echo "<td colspan='3' class='ButtonContainers'><button class='addStudentButton'>Add Student</button></td>";
+  echo "<td colspan='3' class='ButtonContainers'><form action='../cancel_advisor_appointment.php' method='post'>";
+  echo "<button type='submit' name='ID' value='" . $_POST['ID'] . "' class='deleteMeetingButton'>Delete Meeting</button>";
+  echo "</form></td>";
   echo "</table>";
 }
-
+else {
+  echo "<br><br><button class='addStudentButton'>Add Student</button>";
+  echo "<form action='../cancel_advisor_appointment.php' method='post'>";
+  echo "<button type='submit' name='ID' value='" . $_POST['ID'] . "' class='deleteMeetingButton'>Delete Meeting</button>";
+  echo "</form><br>";
+}
 ?>
 
 <p><a href = "advisor_view.php"> Go Back to Advisor View </a></p>

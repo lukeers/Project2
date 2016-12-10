@@ -160,7 +160,7 @@ $rs = mysql_query($sql, $conn);
 include "../advisor_nav_bar.php";
 
 $appt = mysql_fetch_array($rs);
-$storage_array = array($appt);
+$storage_array = array();
 //Used to store appoints in the past
 $old_appointments = array();
 //Used to store individual appointments
@@ -193,23 +193,24 @@ if($appt)
 
   // Now this cycles through the section of the query
   while ($appt) {
+    array_push($storage_array,$appt);
     //Sorts into past appointments and future
+    //If appoint was in past store for later
     if(strtotime($appt['Date']) < strtotime("Now"))
     {
       array_push($old_appointments, $appt);
-      array_push($storage_array,$appt);
       $appt = mysql_fetch_array($rs);
       continue;
     }
+    //If appointment is individual store for later
     if($appt['isGroup'] == 0)
     {
       array_push($catch_case_appointments, $appt);
-      array_push($storage_array,$appt);
       $appt = mysql_fetch_array($rs);
       continue;
     }
     //Returns 0 if they are equal (doesn't look at case)
-    if(!strcasecmp($_SESSION['username'] , $appt['AdvisorUsername']))
+    if(strcasecmp($_SESSION['username'] , $appt['AdvisorUsername']) == 0)
     {
       echo "<tr class='userRow'>";
     }
@@ -230,28 +231,23 @@ if($appt)
     {
       echo "<td>";
       echo "<form method=post action='view_students.php'>";
-      echo "<input type=hidden name='ID' value=$apptID />";
-      echo "<input type=submit value='View Registered Students'/>";
+      echo "<button type='submit' name='ID' value='" . $appt['id'] . "'>View Registered Students</button>";
       echo "</form>";
       echo "</td>";
-
       // If there are not any students signed up then tell the user that
     } else {
       echo "<td>No Students Registered</td>";
     }
 
-    ?>
+  //Canceling Appoitnment Button
+  echo "<td>";
+  echo "<form method=post action='../cancel_advisor_appointment.php'>";
+  echo "<button type='submit' name='ID' value='" . $appt['id'] . "'>Cancel</button>";
+  echo "</form>";
+	echo "</td>";
 
-    <td>
-    <form method=post action="../cancel_advisor_appointment.php">
-       <?php echo "<input type=hidden name='ID' value=$apptID />"; ?>
-       <input type=submit value="Cancel"/>
-       </form>
-	 </td>
-<?php
   echo "</tr>";
   $appt = mysql_fetch_array($rs);
-  array_push($storage_array,$appt);
 } // End the table printing loop
   echo "</table><br class='list_view'>";
 
@@ -453,7 +449,9 @@ function printAppointments($timeEvaluation, $appointmentArray)
 {
   for($i = 0 ; $i < count($appointmentArray) ; $i++)
   {
-    //If appointments are further than the current date evaluation
+    //If appointments are further than the current date evaluation then haven't gotten
+    //appointments yet
+    //Ex: Looking at 21st and Appointment on 23rd then need 2 more days till appointments begin
     if(date("Y-m-d", $timeEvaluation) < $appointmentArray[$i]['Date']){
       return;
     }

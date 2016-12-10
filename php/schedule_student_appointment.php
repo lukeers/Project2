@@ -16,7 +16,7 @@ include ('mysql_connect.php');
 <form method=post action="get_appointments.php">
   <p><b>Type of Meeting:<br></b>
     <!-- value is passed to function where it shows and hides respectively -->
-    <input type="radio" name="typeMeeting" id="BothMeetings" value="all" onclick="radioToggle(this)" checked>Either
+    <input type="radio" name="typeMeeting" id="BothMeetings" value="all" onclick="radioToggle(this)" checked>Both
     <input type="radio" name="typeMeeting" id="GroupMeeting" value="group1" onclick="radioToggle(this)">Group
     <input type="radio" name="typeMeeting" id="IndividMeeting" value="group0" onclick="radioToggle(this)">Individual
   </p>
