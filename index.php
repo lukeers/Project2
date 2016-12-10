@@ -1,7 +1,7 @@
 <?php
 
 
-  require_once('mysql_connect.php');
+  require_once('php/mysql_connect.php');
   // get website status
 
   $sql = "SELECT `status` FROM `websitestatus` WHERE id=1";
@@ -15,7 +15,7 @@
 
   if($webisteStatus == "On") {
     // the main page
-    header("Location: ../html/forms/main_login.html");
+    header("Location: html/forms/main_login.html");
   }
   else if($webisteStatus == "Off") {
     // advising season shut down page
@@ -24,9 +24,8 @@
   }
   else {
     // in case the database is unsure
-    // error page
-    //include();
-    echo("Unknown error");
+    // error case
+    echo("Unknown error!");
     }
 
 
