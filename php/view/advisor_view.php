@@ -2,8 +2,8 @@
 <!-- This file shows the advisor what appointments they have scheduled -->
 <!--
 File call/redirect
-	Receive: validate_advisor_login.php, advisor_view.php, validate_appointment.php, cancel_advisor_appointment.php
-	Send: first_page.html, cancel_advisor_appointment.php, add_appointment.html
+	Receive: validate_advisor_login.php, advisor_view.php, validate_appointment.php, cancel_advisor_appointment.php, view_students.php
+	Send: first_page.html, cancel_advisor_appointment.php, add_appointment.html, view_students.php
 -->
 
 <html>
@@ -87,6 +87,8 @@ table#calendar_view th
   height: 25px;
 }
 /* End of List View Style */
+
+/* Defines the colors for the user and other-users */
 .userRow, .userButton, .userButtonColor
 {
   background-color: palegreen;
@@ -95,11 +97,13 @@ table#calendar_view th
 {
   background-color: lightblue;
 }
+
+/* Spaces out the checkboxes */
 #CheckBoxStyle.otherUserButtonColor
 {
   margin-left: 80px;
 }
-
+/* Applies custom checkbox style */
 #CheckBoxStyle
 {
   -webkit-appearance: none;
@@ -152,12 +156,12 @@ if(date("D",$recordTime) == "Sat" || date("D",$recordTime) == "Sun")
 }
 // end calendar preparation
 
+// Includes the navigation bar
+include "../advisor_nav_bar.php";
+
 //Fetching appointments
 $sql = "SELECT * FROM appointments ORDER BY Date ASC, Time ASC";
 $rs = mysql_query($sql, $conn);
-
-// Includes the navigation bar
-include "../advisor_nav_bar.php";
 
 $appt = mysql_fetch_array($rs);
 $storage_array = array();
@@ -360,7 +364,9 @@ if($appt)
 
 else
 {
-  echo "<h3>You have not scheduled any appointments</h3>";
+  echo "<h3>You have not scheduled any appointments<br>";
+  echo "<button class='swapView' id='showTable' onclick='showTableButton()'>Table View</button>";
+  echo "<button class='swapView' id='showList' onclick='showListButton()'>List View</button></h3>";
 }
 
 // CALENDAR VIEW
@@ -459,7 +465,7 @@ function printAppointments($timeEvaluation, $appointmentArray)
       //echo $appointmentArray[$i]['Date'] . ": " . date("Y-m-d", $timeEvaluation) . "<br>"  . $timeEvaluation . " =?= " . strtotime($appointmentArray[$i]['Date']);
       $appointmentTime = strtotime($appointmentArray[$i]['Time']);
       $EndAppointTime = strtotime("+30 minutes", $appointmentTime);
-      $buttonString = date("g:ia", $appointmentTime) . "-" . date("g:ia", $EndAppointTime) . " | " . $appointmentArray[$i]['NumStudents']. "/?";
+      $buttonString = date("g:ia", $appointmentTime) . "-" . date("g:ia", $EndAppointTime) . " | " . $appointmentArray[$i]['NumStudents']. "/" . $appointmentArray[$i]['size'];
       echo "<form method='post' action='view_students.php'>";
       //Returns 0 if they are equal (doesn't look at case)
       if(strcasecmp($_SESSION['username'] , $appointmentArray[$i]['AdvisorUsername']) === 0){

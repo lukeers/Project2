@@ -22,11 +22,12 @@ File call/redirect
     <h1>Add an appointment </h1>
     <form method=post action="../../php/validate/validate_appointment.php">
     <!-- Gets the necessary information about the appontment, date, time, location, group -->
-    <p>Date: <input type=date name="date"/></p>
+    <p>Date: <input type=date name="date" id="dateSelector" required></p>
     <p>
       <!-- Time is restricted to only having the times between 8:00am and 4:30 pm selected in 30 minutes increments -->
-      Time: <select name="time">
-	<option value="08:00" selected>08:00am</option>
+      Time: <select name="time" required>
+  <option value="" selected>Select the time</option>
+	<option value="08:00">08:00am</option>
 	<option value="08:30">08:30am</option>
 	<option value="09:00">09:00am</option>
 	<option value="09:30">09:30am</option>
@@ -46,13 +47,13 @@ File call/redirect
 	<option value="16:30">04:30pm</option>
       </select>
     </p>
-    <p>Location: <input type=text name="location"/></p>
+    <p>Location: <input type=text name="location" required></p>
     <p>Group? <select name="group">
 	<option value=1 selected>Yes</option>
 	<option value=0>No</option>
-      </select>
+  </select>
       <br>
-      <input type="radio" class="appointSize" name="group_size" value="1">1
+      <input type="radio" class="appointSize" name="group_size" value="1" required>1
       <input type="radio" class="appointSize" name="group_size" value="5">5
       <input type="radio" class="appointSize" name="group_size" value="10">10
       <input type="radio" class="appointSize" name="group_size" value="15">15
@@ -64,8 +65,25 @@ File call/redirect
     </form>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    todayDate = new Date();
+    todayDate = todayDate.getFullYear() + "-" + (todayDate.getMonth()+1) + "-" + todayDate.getDay();
+    console.log(todayDate);
+    // document.getElementById('dateSelector').min = todayDate;
+    console.log(new Date());
+}, false);
 function groupSizeOther(groupSize)
 {
   document.getElementById('other').value = groupSize;
 }
+function evaluation()
+{
+  element = document.getElementById('dateSelector').value;
+  console.log("Contain: " + element);
+  if(element < todayDate)
+  {
+  console.log("Check: " + todayDate);
+  }
+}
+
 </script>

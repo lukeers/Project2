@@ -1,10 +1,17 @@
-<!-- add_appointment_error.html --> 
+<!-- add_appointment_error.html -->
 <!-- This tile gives the form back to the advisor after they did something that was invalid -->
+<!--
+Receive: validate_appointment.php
+Send: advisor_view.php
+-->
 
-<?php require('../../html/header.html'); ?>
+
+<?php require('../../php/advisor_nav_bar.php'); ?>
     <h1>Add an appointment </h1>
-        <!-- Prints the error message for the user to see what they did wrong --> 
-	<?php echo $error_message; ?>
+        <!-- Prints the error message for the user to see what they did wrong -->
+	<?php echo "<span class='error'>" . $_SESSION['error_message'] . "</span>"; ?>
+  <!-- <?php echo $_POST['Date']; ?> -->
+  <?php echo session_status(); ?>
 
     <form method=post action="../../php/validate/validate_appointment.php">
       <!-- Gets the Date when the meeting will take place -->
@@ -42,4 +49,7 @@
     </p>
     <p><input type=submit value="Submit"/></p>
     </form>
-<?php require('../../html/footer.html'); ?>
+<?php
+  require('../../html/footer.html');
+  session_unset('error_message')
+?>
