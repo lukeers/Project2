@@ -1,5 +1,35 @@
 <html>
+<body>
+  <?php
+  session_start();
+  require_once('mysql_connect.php');
+  $sql = "SELECT `status` FROM `websitestatus` WHERE id=1";
+  $rs = mysql_query($sql, $conn);
+  $status = mysql_fetch_array($rs);
+  ?>
+
+<table class="navigation_bars">
+  <tr>
+    <td id="header" colspan="2">
+      Logged in as: <?php echo $_SESSION["username"]; ?>
+      <a href="../../html/forms/main_login.php"><button id="logout">Logout</button></a>
+    </td>
+  </tr>
+  <tr>
+    <td id="nav">
+      <a href="../../php/view/advisor_view.php" class="nav_links"><p class="nav_links">View Appointments</p></a>
+      <a href="../../html/forms/add_appointment.php" class="nav_links"><p class="nav_links">Add Appointment</p></a>
+      <a href="#" class="nav_links"><p class="nav_links">Make Reports</p></a>
+      <a href="../../html/forms/register_advisor.php" class="nav_links"><p class="nav_links">Register Advisor</p></a>
+
+    <div id="fillRest">
+      <a class="nav_links"><p name="Show Self" class="nav_links">Season Status: <?php echo $status['status']; ?></p></a>
+    </div>
+    </td>
+    <td id="content">
+
 <style>
+
 table.navigation_bars
 {
   /* border: 1px #122232 solid; */
@@ -7,6 +37,7 @@ table.navigation_bars
   width: 100%;
   border-collapse: collapse;
 }
+/*styling links for left navigation bar*/
 a.nav_links
 {
   text-decoration: none;
@@ -19,6 +50,7 @@ p.nav_links
   padding: 10px 3 10px 3;
   background-color: #122232;
 }
+/*hover effects for left bar*/
 p.nav_links:hover
 {
   background-color: #BEC6CE;
@@ -34,10 +66,12 @@ p.nav_links:hover
 {
   margin: 0 15px;
 }
+/*logout on right side of header*/
 #logout
 {
   float: right;
 }
+/*top navigation bar*/
 #header
 {
   height: 22px;
@@ -46,6 +80,7 @@ p.nav_links:hover
   color: white;
   text-align: left;
 }
+/*side navigation bar for user*/
 #nav
 {
   vertical-align: top;
@@ -54,11 +89,13 @@ p.nav_links:hover
   background-color: #122232;
   position: relative;
 }
+/*What is changing in the view*/
 #content
 {
   text-align: center;
   vertical-align: top;
 }
+/*Lower to bottom of the screen for side nav*/
 #fillRest
 {
   position: absolute;
@@ -68,29 +105,3 @@ p.nav_links:hover
   vertical-align: bottom;
 }
 </style>
-
-<body>
-  <?php
-  session_start();
-  ?>
-
-<table class="navigation_bars">
-  <tr>
-    <td id="header" colspan="2">
-      Logged in as: <?php echo $_SESSION["username"]; ?>
-      <a href="../../html/forms/main_login.html"><button id="logout">Logout</button></a>
-    </td>
-  </tr>
-  <tr>
-    <td id="nav">
-      <a href="../../php/view/advisor_view.php" class="nav_links"><p class="nav_links">View Appointments</p></a>
-      <a href="../../html/forms/add_appointment.php" class="nav_links"><p class="nav_links">Add Appointment</p></a>
-      <a href="#" class="nav_links"><p class="nav_links">Make Reports</p></a>
-      <a href="#" class="nav_links"><p class="nav_links">Remove Appointment</p></a>
-      <a href="../../html/forms/register_advisor.php" class="nav_links"><p class="nav_links">Register Advisor</p></a>
-
-    <div id="fillRest">
-      <a class="nav_links"><p name="Show Self" class="nav_links">Show All Advisors</p></a>
-    </div>
-    </td>
-    <td id="content">
