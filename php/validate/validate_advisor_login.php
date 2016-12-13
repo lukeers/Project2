@@ -12,17 +12,19 @@ $name_found = False;
 $error_message  = "";
 $password_found = false;
 
+session_start();
+
 //Checking if name in db - GOOD if found
 while($username = mysql_fetch_array($rs))
 {
 
-  if ($_POST['entered_username'] == $username['username'])
+  if ($_POST['username'] == $username['username'])
   {
     $name_found = True;
   }
 }
 if($name_found) {
-  $sql = "SELECT `password` FROM `advisorpasswords` WHERE `username`='" . $_POST['entered_username']. "'";
+  $sql = "SELECT `password` FROM `advisorpasswords` WHERE `username`='" . $_POST['username']. "'";
   $rs = mysql_query($sql, $conn);
 
   if (!$rs) {
@@ -31,34 +33,26 @@ if($name_found) {
 
   $password = mysql_fetch_array($rs);
 
-  if (sha1($_POST['entered_password']) == $password['password']) {
-      $password_match = True;
+  if (sha1($_POST['password']) == $password['password']) {
+      $password_found = True;
   }
 }
 
 // This is the pass case
-if ($name_found && $password_match)
+if ($name_found && $password_found)
 {
   session_start();
-  $_SESSION['username'] = $_POST['entered_username'];
+  $_SESSION['username'] = $_POST['username'];
   header('Location:../../php/view/advisor_view.php');
 }
 
 // This is the fail case
 else
 {
-  // Username field left blank
-  if ($_POST['entered_username'] == "")
-  {
-    $error_message .= "Username field can't be blank.<br>";
-  }
-
   // Username does not exists in the table
-  else
-  {
-    $error_message = "Username and/or password not recognized.<br>";
-  }
-
-  include('../../html/error_forms/advisor_login_error.html');
+  $error_message = "Username and/or password not recognized.<br>";
+  $_SESSION['error_message'] = $error_message;
+  $_SESSION['user'] = "advisor";
+  include('../../html/forms/main_login.php');
 }
 ?>

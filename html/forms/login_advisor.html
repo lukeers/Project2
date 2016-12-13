@@ -1,23 +1,30 @@
-<!-- login_avisor.html -->
+<!-- login_advisor.html -->
 <!-- This file will get a username from the user then compare it to the database, if there is a match then the user will be logged in -->
 
 <link rel="import" href="../header.html")>
 <link rel='stylesheet' type='text/css' href='../css/style.css'/>
 
-<div class="main">
+<table><form name="advisorform" method=post action='../../php/validate/validate_advisor_login.php' onsubmit="return validateAdvisorForm();">
+	<!-- Gets information from the potential advisor, username, first name, last name -->
+	<p><tr><td>Username: </td><td><input type=text name="username" style="width: 200px" required/></td></tr></p>
+	<p><tr><td>Password: </td><td><input type=text name="password" required style="width: 200px" required/></td></tr></p>
+	<p id="passErr"></p>
+	<p><tr><td><input type=submit id="submit" class="button" value="Submit"/></td></tr></p>
+</form></table>
 
-<h1>Advisor Login</h1>
-    <form method=post action='../../php/validate/validate_advisor_login.php'>
-      <!-- Gets the only necessary data, a username from the user -->
-      <p>Username: <input type=text name="entered_username"/></p>
-      <p>Password: <input type=password name="entered_password"/></p>
-
-      <p><input type=submit value="Submit"/></p>
-    </form>
-
-	<p>Not signed up? Click <a href = "main_login.html">here</a> to register.</p>
-
-
-</div>
+<script>
+function validateAdvisorForm() {
+	var x = document.forms["advisorform"];
+	var isValid = true;
+			
+	//Checks if password is atleast 6 characters long
+	if(x.password.value.length < 6) {
+		x.password.style.borderColor = "red";
+		document.getElementById("passErr").innerHTML = "Password must be at least 6 characters long.";
+		isValid = false;
+	}
+	return isValid;
+}
+</script>
 
 <link rel="import" href="../footer.html")>

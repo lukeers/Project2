@@ -12,6 +12,8 @@ $rs = mysql_query($sql, $conn);
 $errors = False;
 $error_message = "";
 
+session_start();
+
 //Loop through student IDs, check for match
 $IDs = mysql_fetch_array($rs);
 
@@ -31,7 +33,6 @@ else if (strcasecmp($_POST['firstName'], $IDs['firstName']) != 0
 if ($errors != True) 
 {
   //No errors - GOOD - Insert into database
-  session_start();
   $_SESSION['studentID'] = $_POST['studentID'];
 
   // Go to the student_view.php file
@@ -40,7 +41,8 @@ if ($errors != True)
 else
 {
   // Go to the main_login.html file
-  echo($error_message);
-  require('../../html/forms/main_login.html');
+  $_SESSION['error_message'] = $error_message;
+  $_SESSION['user'] = "student";
+  require('../../html/forms/main_login.php');
 }
 ?>

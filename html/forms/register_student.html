@@ -3,39 +3,32 @@
  there is not a match by student ID in the database then creates and logs in a new student
 --> 
 
-    <h1>Student Registration</h1>
-    <form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateForm();">
-      <!-- Gets information from the potential student, username, major -->
-      <p>First Name: <input type=text name="firstName" required/></p>
-      <p>Last Name: <input type=text name="lastName" required/></p>
-      <p>Student ID: <input type=text name="studentID" required/></p>
-	  <p id="idErr"></p>
-      <p>UMBC Email: <input type=text name="email" required/></p>
-	  <p id="emailErr"></p>
-      <p>Major: <select name="major">
-	  
-	  <!-- This creates a drop down box of the possible major choices -->
-	  <option value = "Biological Sciences BA">Biological Sciences BA</option>
-	  <option value = "Biological Sciences BS">Biological Sciences BS</option>
-	  <option value = "Biochemistry & Molecular Biology BS">Biochemistry & Molecular Biology BS</option>
-	  <option value = "Bioinformatics & Computational Biology BS">Bioinformatics & Computational Biology BS</option>
-	  <option value = "Biology Education BA">Biology Education BA</option>
-	  <option value = "Chemistry BA">Chemistry BA</option>
-	  <option value = "Chemistry BS">Chemistry BS</option>
-	  <option value = "Chemistry Education BA">Chemistry Education BA</option>
-	  
-	  </select>
-	  </p>
-	  
-      <p><input type=submit id="submit" class="button" value="Submit"/></p>
-    </form>
+<table><form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateStudentForm();">
+	<!-- Gets information from the potential student, username, major -->
+	<p><tr><td>First Name: </td><td><input type=text name="firstName" style="width: 200px" required/></td></tr></p>
+	<p><tr><td>Last Name: </td><td><input type=text name="lastName" style="width: 200px" required/></td></tr></p>
+	<p><tr><td>Student ID: </td><td><input type=text name="studentID" style="width: 200px" required/></td></tr></p>
+	<p><tr><td>UMBC Email: </td><td><input type=text name="email" style="width: 200px" required/></td></tr></p>
+	<p><tr><td>Major: </td><td><select name="major">
+		<!-- This creates a drop down box of the possible major choices -->
+		<option value = "Biological Sciences BA">Biological Sciences BA</option>
+		<option value = "Biological Sciences BS">Biological Sciences BS</option>
+		<option value = "Biochemistry & Molecular Biology BS">Biochemistry & Molecular Biology BS</option>
+		<option value = "Bioinformatics & Computational Biology BS">Bioinformatics & Computational Biology BS</option>
+		<option value = "Biology Education BA">Biology Education BA</option>
+		<option value = "Chemistry BA">Chemistry BA</option>	
+		<option value = "Chemistry BS">Chemistry BS</option>
+		<option value = "Chemistry Education BA">Chemistry Education BA</option>
+		<option value = "Other">Other</option>
+	</select></td></tr></p>
+	<p><tr><td><br><input type=submit id="submit" class="button" value="Submit"/></td></tr></p>
+
+	</form></table>
+</div>	
 	
-    	<!-- Hyperlink to the login student page -->
-	<p>Already signed up? Click <a href = "login_student.html">here</a> to log in.</p>
-	
-	<script>
+<script>
 	function validateForm(){
-		var x = document.forms["studentform"];
+	var x = document.forms["studentform"];
 		var isValid = true;
 		
 		if(!/^[A-Za-z]{2}\d{5}$/g.test(x.studentID.value)){
@@ -50,4 +43,4 @@
 		}
 		return isValid;
 	}
-	</script>
+</script>
