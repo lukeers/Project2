@@ -20,7 +20,7 @@ h1 {
    font-size: 30px;
 }
 
-.formContainer input{
+.formContainer input[type="text"]{
   width: 200px;
 }
 
