@@ -1,23 +1,31 @@
-html{ 
+html{
     background-image: url("images/truegrit_background.jpg");
     background-position: right top;
 }
 
 .main {
-    color: black; 
-    background-color: white; 
-    margin: 140px auto; 
+    color: black;
+    background-color: white;
+    margin: 140px auto;
     padding: 20px 20px 20px;
-	position: relative;	
-    width: 600px; 
+	position: relative;
+    width: 600px;
     border-width: 4px;
     border-radius: 10px;
     border-style: solid;
 }
 
 h1 {
-   font-family: "arial"; 
+   font-family: "arial";
    font-size: 30px;
+}
+
+.formContainer input{
+  width: 200px;
+}
+
+.caps{
+  text-transform: uppercase;
 }
 
 .switch {
@@ -42,5 +50,5 @@ h1 {
     text-align: center;
     border-radius: 5px;
     padding: 5px 10px;
-    
+
 }

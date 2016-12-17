@@ -1,14 +1,14 @@
 <!-- register_student.html -->
 <!-- Gets information from a potential student compares it to make sure
  there is not a match by student ID in the database then creates and logs in a new student
---> 
+-->
 
-<table><form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateStudentForm();">
+<table class="formContainer"><form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateStudentForm();">
 	<!-- Gets information from the potential student, username, major -->
-	<p><tr><td>First Name: </td><td><input type=text name="firstName" style="width: 200px" required/></td></tr></p>
-	<p><tr><td>Last Name: </td><td><input type=text name="lastName" style="width: 200px" required/></td></tr></p>
-	<p><tr><td>Student ID: </td><td><input type=text name="studentID" style="width: 200px" required/></td></tr></p>
-	<p><tr><td>UMBC Email: </td><td><input type=text name="email" style="width: 200px" required/></td></tr></p>
+	<p><tr><td>First Name: </td><td><input type=text name="firstName" required/></td></tr></p>
+	<p><tr><td>Last Name: </td><td><input type=text name="lastName" required/></td></tr></p>
+	<p><tr><td>Student ID: </td><td><input type=text name="studentID" class="caps" required/></td></tr></p>
+	<p><tr><td>UMBC Email: </td><td><input type=text name="email" required/></td></tr></p>
 	<p><tr><td>Major: </td><td><select name="major">
 		<!-- This creates a drop down box of the possible major choices -->
 		<option value = "Biological Sciences BA">Biological Sciences BA</option>
@@ -16,7 +16,7 @@
 		<option value = "Biochemistry & Molecular Biology BS">Biochemistry & Molecular Biology BS</option>
 		<option value = "Bioinformatics & Computational Biology BS">Bioinformatics & Computational Biology BS</option>
 		<option value = "Biology Education BA">Biology Education BA</option>
-		<option value = "Chemistry BA">Chemistry BA</option>	
+		<option value = "Chemistry BA">Chemistry BA</option>
 		<option value = "Chemistry BS">Chemistry BS</option>
 		<option value = "Chemistry Education BA">Chemistry Education BA</option>
 		<option value = "Other">Other</option>
@@ -24,13 +24,13 @@
 	<p><tr><td><br><input type=submit id="submit" class="button" value="Submit"/></td></tr></p>
 
 	</form></table>
-</div>	
-	
+</div>
+
 <script>
 	function validateForm(){
 	var x = document.forms["studentform"];
 		var isValid = true;
-		
+
 		if(!/^[A-Za-z]{2}\d{5}$/g.test(x.studentID.value)){
 			x.studentID.style.borderColor = "red";
 			document.getElementById("idErr").innerHTML = "Invalid student ID.";
