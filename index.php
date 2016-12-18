@@ -20,7 +20,7 @@
   else if($webisteStatus == "Off") {
     // advising season shut down page
     echo("Website is down");
-    //include();
+    // header()
   }
   else {
     // in case the database is unsure
