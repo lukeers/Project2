@@ -35,8 +35,8 @@ if ($errors != True)
   //No errors - GOOD - Insert into database
   $_SESSION['studentID'] = $_POST['studentID'];
 
-  // Go to the student_view.php file
-  header('Location:../view/student_view.php');
+  // Go to the student_major_plans.html file
+  require('../../html/forms/student_major_plans.html');
 }
 else
 {
