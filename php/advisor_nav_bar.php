@@ -39,13 +39,13 @@
       <?php
       if (strcasecmp($status['status'],"On") == 0)
       echo "
-      <a class='nav_links' href='website_shut_down.php'><p id='shutdown' class='nav_links'>
+      <a class='nav_links' href='../../html/forms/website_shut_down.php'><p id='shutdown' class='nav_links'>
         Season Status: On
       </p></a>";
       else
       {
       echo "
-      <a class='nav_links' href='website_restart.php'><p id='restart' class='nav_links'>
+      <a class='nav_links' href='../../html/forms/website_restart.php'><p id='restart' class='nav_links'>
         Season Status: Off
       </p></a>";
       }
