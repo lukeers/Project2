@@ -1,3 +1,4 @@
+<?php include("../../php/advisor_nav_bar.php"); ?>
 <h1>Reopen Website?</h1>
   <p> <b> Warning: this will <u>OPEN</u> registration for students to register for advising </b></p>
     <form method=post action='../../php/validate/change_websitestatus.php'>

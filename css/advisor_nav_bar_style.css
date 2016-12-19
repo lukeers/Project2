@@ -29,6 +29,11 @@ p#shutdown:hover
   background-color: lightcoral;
   color: black;
 }
+p#restart:hover
+{
+  background-color: darkseagreen;
+  color: black;
+}
 
 .top_container
 {

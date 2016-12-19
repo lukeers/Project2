@@ -53,11 +53,12 @@ include("../../php/advisor_nav_bar.php");
   <h3>Repeat:</h3>
   <table class="massScheduleTable">
   <tr>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
+    <th></th>
+    <th onclick="onSwapClick(this)" name='mon[]'>Monday</th>
+    <th onclick="onSwapClick(this)" name='tues[]'>Tuesday</th>
+    <th onclick="onSwapClick(this)" name='wed[]'>Wednesday</th>
+    <th onclick="onSwapClick(this)" name='thurs[]'>Thursday</th>
+    <th onclick="onSwapClick(this)" name='fri[]'>Friday</th>
   </tr>
     <?php
     $times = array(
@@ -78,9 +79,10 @@ include("../../php/advisor_nav_bar.php");
     for($i = 0 ; $i < count($times) ; $i++)
     {
       echo "<tr>";
+      echo "<th onclick='onSwapClick(this)' name=". $values[$i] .">&rarr;</th>";
       for($j = 0 ; $j < count($day) ; $j++)
       {
-        echo "<td><input type='checkbox' name=" . $day[$j] . " value=". $values[$i] .">". $times[$i] ."</td>";
+        echo "<td><input type='checkbox' class='". substr($day[$j],1,-1) ." ". substr($values[$i],1,-1) ."' name=" . $day[$j] . " value=". $values[$i] .">". $times[$i] ."</td>";
       }
       echo "</tr>";
     }
@@ -89,3 +91,33 @@ include("../../php/advisor_nav_bar.php");
   <p><input type=submit value="Submit"/></p>
 </form>
 </html>
+
+<script>
+function onSwapClick(element)
+{
+  elements = document.getElementsByClassName(element.getAttribute("name"));
+  console.log(elements);
+  counter = 0;
+  for(i = 1 ; i < elements.length ; i++)
+  {
+    if(elements[i].checked == true)
+    {
+      counter++;
+    }
+    else {
+        counter--;
+    }
+  }
+  console.log(counter);
+  for(i = 0 ; i < elements.length ; i++)
+  {
+    if(counter >= 0)
+    {
+      elements[i].checked = false;
+    }
+    else {
+        elements[i].checked = true;
+    }
+  }
+}
+</script>

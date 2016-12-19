@@ -20,6 +20,12 @@ table.massScheduleTable th
 {
   border: solid 1px black;
 }
+table.massScheduleTable th:hover
+{
+  background-color: black;
+  color: white;
+}
+
 input.appointSize_other
 {
   margin-top: 5px;

@@ -3,6 +3,14 @@
 <body>
   <?php
   session_start();
+  //Sends to login if no session
+  if(session_status() == 2 && !isset($_SESSION['username']))
+  {
+    $_SESSION['user'] = "advisor";
+    $_SESSION['error_message'] = "You've been logged out due to inactivity";
+    header("Location:../../html/forms/main_login.php");
+  }
+
   require_once('mysql_connect.php');
   $sql = "SELECT `status` FROM `websitestatus` WHERE id=1";
   $rs = mysql_query($sql, $conn);
@@ -23,11 +31,22 @@
       <a href="../../html/forms/mass_scheduler.php" class="nav_links"><p class="nav_links">Weekly Scheduler</p></a>
       <a href="#" class="nav_links"><p class="nav_links">Make Reports</p></a>
       <a href="../../html/forms/register_advisor.php" class="nav_links"><p class="nav_links">Register Advisor</p></a>
-      <a href="#" class="nav_links"><p class="nav_links">Edit Profile</p></a>
+
     <div id="fillRest">
-      <a class="nav_links" href="website_shut_down.html"><p name="Show Self" id="shutdown" class="nav_links">
-        Season Status: <?php echo $status['status']; ?>
-      </p></a>
+      <?php
+      if (strcasecmp($status['status'],"On") == 0)
+      echo "
+      <a class='nav_links' href='website_shut_down.php'><p id='shutdown' class='nav_links'>
+        Season Status: On
+      </p></a>";
+      else
+      {
+      echo "
+      <a class='nav_links' href='website_restart.php'><p id='restart' class='nav_links'>
+        Season Status: Off
+      </p></a>";
+      }
+      ?>
     </div>
     </td>
     <td id="content">

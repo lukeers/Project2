@@ -86,10 +86,10 @@
 
     // revert back to old page
     if($status == "On") {
-      include("../../html/forms/website_shut_down.html");
+      include("../../html/forms/website_shut_down.php");
     }
     else {
-      include("../../html/forms/website_restart.html");
+      include("../../html/forms/website_restart.php");
     }
 
 

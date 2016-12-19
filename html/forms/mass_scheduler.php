@@ -53,11 +53,11 @@ include("../../php/advisor_nav_bar.php");
   <h3>Repeat:</h3>
   <table class="massScheduleTable">
   <tr>
-    <th>Monday</th>
-    <th>Tuesday</th>
-    <th>Wednesday</th>
-    <th>Thursday</th>
-    <th>Friday</th>
+    <th onclick="onSwapClick(this)" name="mon[]">Monday</th>
+    <th onclick="onSwapClick(this)" name="tues[]">Tuesday</th>
+    <th onclick="onSwapClick(this)" name="wed[]">Wednesday</th>
+    <th onclick="onSwapClick(this)" name="thurs[]">Thursday</th>
+    <th onclick="onSwapClick(this)" name="fri[]">Friday</th>
   </tr><tr>
     <td><input type="checkbox" name="mon[]" value="8">8:00 - 8:30 AM</td>
     <td><input type="checkbox" name="tues[]" value="8">8:00 - 8:30 AM</td>
@@ -175,3 +175,34 @@ include("../../php/advisor_nav_bar.php");
   <p><input type=submit value="Submit"/></p>
 </form>
 </html>
+
+<script>
+function onSwapClick(element)
+{
+  elements = document.getElementsByName(element.getAttribute("name"));
+  console.log(element.getAttribute("name"));
+  console.log(elements);
+  counter = 0;
+  for(i = 1 ; i < elements.length ; i++)
+  {
+    if(elements[i].checked == true)
+    {
+      counter++;
+    }
+    else {
+        counter--;
+    }
+  }
+  console.log(counter);
+  for(i = 0 ; i < elements.length ; i++)
+  {
+    if(counter >= 0)
+    {
+      elements[i].checked = false;
+    }
+    else {
+        elements[i].checked = true;
+    }
+  }
+}
+</script>
