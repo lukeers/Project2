@@ -1,9 +1,11 @@
-html{
+html
+{
     background-image: url("images/truegrit_background.jpg");
     background-position: right top;
 }
 
-.main {
+.main
+{
     color: black;
     background-color: white;
     margin: 140px auto;
@@ -15,26 +17,31 @@ html{
     border-style: solid;
 }
 
-h1 {
+h1 
+{
    font-family: "arial";
    font-size: 30px;
 }
 
-.formContainer input[type="text"], .formContainer input[type="password"]{
+.formContainer input[type="text"], .formContainer input[type="password"]
+{
   width: 200px;
 }
 
-.caps{
+.caps
+{
   text-transform: uppercase;
 }
 
-.switch {
+.switch 
+{
     display: block;
     text-align: center;
 	border-bottom: thin solid;
 }
 
-.switch .button {
+.switch .button 
+{
     background-color: LightGrey;
 	padding: 10px 15px;
     color: black;
@@ -44,11 +51,103 @@ h1 {
 }
 
 
-#submit.button {
+#submit.button 
+{
     background-color: #66AA44;
     color: white;
     text-align: center;
     border-radius: 5px;
     padding: 5px 10px;
 
+}
+
+/*Student View CSS*/
+table.studentAppointment
+{
+  border-collapse: collapse;
+  border-spacing: 0px 5px;
+ 
+}
+
+table.studentAppointment th, table.studentAppointment td
+{
+	text-align: center;
+	padding: 5px 10px;
+	border: 1px solid black;
+}
+
+table.studentAppointment th
+{
+background-color: lightblue;
+}
+
+/*Schedule Student Appointment CSS*/
+#section 
+{
+	border-bottom: thin solid;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+input[type='checkbox']
+{
+  margin: 3px 2px 3px 6px;
+}
+
+table.appointmentList
+{
+  border-collapse: collapse;
+  border-spacing: 0px 5px;
+  border: 1px solid black;
+}
+
+.appointList
+{
+  margin: 3px 0px;
+}
+
+.appointList:hover
+{
+  background-color: darkgray;
+}
+
+.appointList:nth-child(even)
+{
+  background-color: lightgray;
+}
+
+.appointList:nth-child(even):hover
+{
+  background-color: darkgray;
+}
+
+.appointContent
+{
+  border: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  padding: 2px 9px;
+}
+
+.appointContent:nth-child(even)
+{
+  border-left: none;
+  border-right: none;
+}
+
+.appointContent:last-child
+{
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-right: 1px black solid;
+}
+.appointContent:first-child
+{
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.appointForm
+{
+  margin: 0px;
 }
