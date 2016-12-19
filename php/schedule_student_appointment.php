@@ -17,6 +17,7 @@ File Call/Redirect
 
 <div class="main">
 
+<!-- Back button -->
 <a href='view/student_view.php'><button>&#8592;</button></a>
 
 <div id="section"><h1>Schedule an appointment </h1></div>
@@ -94,6 +95,7 @@ File Call/Redirect
 
 
 <script>
+//Function to change which appointments show based on days
 function toggleCheckbox(element)
 {
   appointElements = document.getElementsByClassName(element.value);
@@ -109,6 +111,8 @@ function toggleCheckbox(element)
 	}
   }
 }
+
+//Change appointments that show based on group, individual, or both
 function radioToggle(element)
 {
   console.log(element);
