@@ -7,7 +7,7 @@ include("../../php/advisor_nav_bar.php");
 
 <h3>Appointment details</h3>
 
-<form method=post action="../../php/mass_scheduling.php">
+<form name="ms" method=post action="../../php/mass_scheduling.php" onsubmit="return validateForm();">
 
   <p>Location: <input type=text name="location"/></p>
   <p>Group Size:
@@ -22,29 +22,24 @@ include("../../php/advisor_nav_bar.php");
 
 
   <?php
-
-  // get the start and end of the week
-  $currentDate = date('Y-m-d');
   $startOfWeek = date('Y-m-d', strtotime("next monday"));
-
-  $date = date('Y-m-d',strtotime($startOfWeek . ' +1 day'));
-  $endOfWeek = date('Y-m-d', strtotime("next friday next week"));
-
-  //
-  echo("<h1>Start Week: ". $startOfWeek . "</h1>");
-  echo("<h2>End Week: ". $endOfWeek . "</h2>");
-  echo("<h3>Date: " . $date . "</h3>");
-
-  echo("Week Start Date: ");
+  echo("Start of Week: ");
   echo("<input type=\"date\"name=\"startdate\" value=\"". $startOfWeek ."\">");
   ?>
 
 
   <script>
   // allow only Mondays to be selected  TODO
-  $(document).ready(function(){
-      $('input').datepicker({beforeShowDay: function(date){ return [date.getDay() == 1, '']; }});
-  });
+
+  function validateForm(){
+    var x = document.forms["ms"];
+    var isValid = true;
+    if(x.startdate.value.getDay() !== 1) {
+      isValid = false;
+      x.startdate.style.borderColor = "red";
+    }
+    return isValid;
+  }
   </script>
 
 
