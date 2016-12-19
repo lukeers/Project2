@@ -31,7 +31,7 @@
     <td id="nav">
       <a href="../../php/view/advisor_view.php" class="nav_links"><p class="nav_links">View Appointments</p></a>
       <a href="../../html/forms/add_appointment.php" class="nav_links"><p class="nav_links">Add Appointment</p></a>
-      <a href="../../html/forms/mass_scheduler.php" class="nav_links"><p class="nav_links">Weekly Scheduler</p></a>
+      <a href="../../html/forms/mass_scheduler_short.php" class="nav_links"><p class="nav_links">Weekly Scheduler</p></a>
       <a href="#" class="nav_links"><p class="nav_links">Make Reports</p></a>
       <a href="../../html/forms/register_advisor.php" class="nav_links"><p class="nav_links">Register Advisor</p></a>
       <!-- Links will fall to bottom of the page -->

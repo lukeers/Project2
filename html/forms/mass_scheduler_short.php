@@ -61,6 +61,7 @@ include("../../php/advisor_nav_bar.php");
     <th onclick="onSwapClick(this)" name='fri[]'>Friday</th>
   </tr>
     <?php
+    //The possible times for each appointment
     $times = array(
       "8:00 - 8:30 AM", "8:30 - 9:00 AM", "9:00 - 9:30 AM", "9:30 - 10:00 AM",
       "10:00 - 10:30 AM", "10:30 - 11:00 AM", "11:00 - 11:30 AM", "11:30 - 12:00 PM",
@@ -68,20 +69,26 @@ include("../../php/advisor_nav_bar.php");
       "2:30 - 3:00 PM", "3:00 - 3:30 PM", "3:30 - 4:00 PM", "4:00 - 4:30 PM",
       "4:30 - 5:00 PM"
     );
+    //Values for each appointment
     $values = array(
       "'8'", "'830'", "'9'", "'9:30'", "'10'", "'1030'", "'11'", "'1130'",
       "'12'", "'1230'", "'1'", "'130'", "'2'", "'230'", "'3'", "'330'",
       "'4'", "'430'"
     );
+    //the day for each appointment
     $day = array(
       "'mon[]'", "'tues[]'", "'wed[]'", "'thurs[]'", "'fri[]'"
     );
+    //Going through each appointment time
     for($i = 0 ; $i < count($times) ; $i++)
     {
       echo "<tr>";
+      //Click for filling in a time across
       echo "<th onclick='onSwapClick(this)' name=". $values[$i] .">&rarr;</th>";
+      //Going through each day
       for($j = 0 ; $j < count($day) ; $j++)
       {
+        //Printing the checkbox for each time
         echo "<td><input type='checkbox' class='". substr($day[$j],1,-1) ." ". substr($values[$i],1,-1) ."' name=" . $day[$j] . " value=". $values[$i] .">". $times[$i] ."</td>";
       }
       echo "</tr>";
