@@ -53,21 +53,25 @@ include ('mysql_connect.php');
       $rs = mysql_query($sql, $conn);
       while ($appoint = mysql_fetch_array($rs))
       {
-        //Add group_YN to the class
-        //echo "<button type='submit' class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "' >";
+        //Makes the row for the appointments
         echo "<tr class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "' >";
+        //Printing the advisor
         echo "<td class='appointContent'>" . $appoint['Advisor'] . "</td>";
+        //Printing the day
         echo "<td class='appointContent'>" . date("D, M j", strtotime($appoint['Date'])) . "</td>";
+        //Prepare for printing the time
         $appointmentTime = strtotime($appoint['Time']);
         $EndAppointTime = strtotime("+30 minutes", $appointmentTime);
         echo "<td class='appointContent'>" . date("g:ia", $appointmentTime) . " - " . date("g:ia", $EndAppointTime) . "</td>";
+        //Print the location
         echo "<td class='appointContent'>" . $appoint['Location'] . "</td>";
+        //Print the number of student enrolled
         echo "<td class='appointContent'>" . $appoint['NumStudents'] . "</td>";
+        //Print the Register button
         echo "<td class='appointContent'><form class='appointForm' action='table_handler.php' method='post'>";
         echo "<button type='submit' name='ID' value='" . $appoint['id'] . "'>Register</button>";
         echo "</form></td>";
         echo "</tr>";
-        //echo "<br class='appointList group" . $appoint['isGroup'] . " " . $appoint['AdvisorUsername'] . " " . date("D",strtotime($appoint['Date'])) . "'>";
       }
 
      ?>
@@ -75,7 +79,7 @@ include ('mysql_connect.php');
 <?php include ('../html/footer.html'); ?>
 
 
-
+<!-- Java Functions -->
 <script>
 function toggleCheckbox(element)
 {
