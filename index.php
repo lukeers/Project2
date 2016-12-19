@@ -15,7 +15,7 @@
 
   if($webisteStatus == "On") {
     // the main page
-    header("Location: html/forms/main_login.html");
+    header("Location: html/forms/main_login.php");
   }
   else if($webisteStatus == "Off") {
     // advising season shut down page

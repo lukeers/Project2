@@ -19,7 +19,6 @@ if($groupSize == "1") {
 $username = $_SESSION['username'];
 
 
-
 // Get the information from the advisors database for the fullName
 // This will be used in the next query
 $sql = "SELECT fullName FROM advisors WHERE Username = \"" . $username . "\"";
