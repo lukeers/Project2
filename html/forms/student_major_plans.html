@@ -3,12 +3,13 @@
 
 <div class="main">
 	
-	<p>What are your current post-UMBC plans? (For example: Medical School, Teach Middle-School science, Research career, Masters / PhD, etc.)<p>
-	<textarea form="plansForm" id="plans" rows="4" cols="50"></textarea>	
-	<p>Do you have any questions or concerns that you would like to discuss during your advising session? (For example: Withdrawing from a course, adding a second major, etc.) </p>
-	<textarea form="plansForm" id="concerns" rows="4" cols="50"></textarea>
+	<form name="studentplansform" method='post' id="plansForm" action='../../php/validate/validate_plans.php' onsubmit="return validatePlansForm();">
 	
-	<form name="studentplansform" method=post id="plansForm" action='../../php/validate/validate_plans.php' onsubmit="return validatePlansForm();">
+	<p>What are your current post-UMBC plans? (For example: Medical School, Teach Middle-School science, Research career, Masters / PhD, etc.)<p>
+	<textarea name="plansForm" rows="4" cols="50"></textarea>	
+	<p>Do you have any questions or concerns that you would like to discuss during your advising session? (For example: Withdrawing from a course, adding a second major, etc.) </p>
+	<textarea name="questionsForm" rows="4" cols="50"></textarea>
+	
 	<p><input type=submit id="submit" class="button" value="Submit"/>
 	</form>
 	
