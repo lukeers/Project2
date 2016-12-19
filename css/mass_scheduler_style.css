@@ -1,0 +1,28 @@
+table.massScheduleTable
+{
+  display: inline-block;
+  border-collapse: collapse;
+}
+
+table.massScheduleTable td
+{
+  border-left: solid 1px black;
+  border-right: solid 1px black;
+  padding: 1px 5px;
+}
+
+table.massScheduleTable tr:last-child
+{
+  border-bottom: solid 1px black;
+}
+
+table.massScheduleTable th
+{
+  border: solid 1px black;
+}
+input.appointSize_other
+{
+  margin-top: 5px;
+  min-width: 35px;
+  width: 50px;
+}

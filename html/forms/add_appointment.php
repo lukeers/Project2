@@ -61,7 +61,7 @@ File call/redirect
       <input type="radio" class="appointSize" name="group_size" value="15">15
       <input type="radio" class="appointSize" name="group_size" value="20">20
       <input type="radio" class="appointSize" name="group_size" value="" id="other">
-          <input class="appointSize_other" type="number" placeholder="Other" min="0" onkeyup="groupSizeOther(this.value)">
+          <input class="appointSize_other" type="number" placeholder="Other" min="0" onkeyup="document.getElementById('other').value = this.value">
     </p>
     <p><input type=submit value="Submit"/></p>
     </form>
@@ -74,18 +74,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // document.getElementById('dateSelector').min = todayDate;
     console.log(new Date());
 }, false);
-function groupSizeOther(groupSize)
-{
-  document.getElementById('other').value = groupSize;
-}
-function evaluation()
-{
-  element = document.getElementById('dateSelector').value;
-  console.log("Contain: " + element);
-  if(element < todayDate)
-  {
-  console.log("Check: " + todayDate);
-  }
-}
 
 </script>
