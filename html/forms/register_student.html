@@ -3,12 +3,12 @@
  there is not a match by student ID in the database then creates and logs in a new student
 -->
 
-<table class="formContainer"><form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateStudentForm();">
+<table class="formContainer"><form name="studentform" method=post action='../../php/validate/validate_student.php' onsubmit="return validateForm();">
 	<!-- Gets information from the potential student, username, major -->
 	<p><tr><td>First Name: </td><td><input type=text name="firstName" required/></td></tr></p>
 	<p><tr><td>Last Name: </td><td><input type=text name="lastName" required/></td></tr></p>
-	<p><tr><td>Student ID: </td><td><input type=text name="studentID" class="caps" required/></td></tr></p>
-	<p><tr><td>UMBC Email: </td><td><input type=text name="email" required/></td></tr></p>
+	<p><tr><td>Student ID: </td><td><input type=text name="studentID" class="caps" required/></td><td><p id="idErr"></p></td></tr></p>
+	<p><tr><td>UMBC Email: </td><td><input type=text name="email" required/></td><td><p id="emailErr"></p></td></tr></p>
 	<p><tr><td>Major: </td><td><select name="major">
 		<!-- This creates a drop down box of the possible major choices -->
 		<option value = "Biological Sciences BA">Biological Sciences BA</option>
@@ -30,7 +30,6 @@
 	function validateForm(){
 	var x = document.forms["studentform"];
 		var isValid = true;
-
 		if(!/^[A-Za-z]{2}\d{5}$/g.test(x.studentID.value)){
 			x.studentID.style.borderColor = "red";
 			document.getElementById("idErr").innerHTML = "Invalid student ID.";
@@ -41,9 +40,6 @@
 			document.getElementById("emailErr").innerHTML = "Invalid student email.";
 			isValid = false;
 		}
-
-		
-
 		return isValid;
 	}
 </script>
