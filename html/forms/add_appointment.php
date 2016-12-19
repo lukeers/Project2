@@ -49,11 +49,7 @@ File call/redirect
     </p>
     <p>Location: <input type=text name="location" required></p>
 
-    <!-- Old group selection -->
-    <!-- <p>Group? <select name="group">
-	     <option value=1 selected>Yes</option>
-	     <option value=0>No</option> -->
-
+    <!-- Group size -->
   </select>
       <input type="radio" class="appointSize" name="group_size" value="1" required>1
       <input type="radio" class="appointSize" name="group_size" value="5">5

@@ -4,12 +4,6 @@
      there is not a match by username in the database then creates and logs in a new advisor
 -->
 
-<!-- Gets information from a potential advisor compares it to make sure
-     there is not a match by username in the database then creates and logs in a new advisor
--->
-<!-- Gets information from a potential advisor compares it to make sure
-     there is not a match by username in the database then creates and logs in a new advisor
--->
     <?php
 	include("../../php/advisor_nav_bar.php");
 	if(isset($_SESSION['error_message'])){
@@ -29,4 +23,3 @@
       <p>Office: <input type=text name="office"/></p>
       <p><input type=submit value="Submit"/></p>
     </form>
-
