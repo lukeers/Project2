@@ -1,0 +1,14 @@
+/* List View Style */
+.list_view form
+{
+  height: 0px;
+}
+.list_view tr
+{
+  height: 25px;
+}
+.list_view td
+{
+  padding: 2px 5px;
+}
+/* End of List View Style */

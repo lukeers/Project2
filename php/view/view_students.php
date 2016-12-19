@@ -107,7 +107,7 @@ if(isset($_POST['typeOfSubmit']))
   //If added student was clicked
   if($_POST['typeOfSubmit'] == "Add")
   {
-    $sql = "INSERT INTO students (major, email, firstName, lastName, studentID, Appt) VALUES ('" . $_POST['major'] . "','" . $_POST['email'] . "','" . $_POST['firstName'] . "','" . $_POST['lastName'] . "','" . $_POST['studentID'] . "','" . $_POST['ID'] . "')";
+    $sql = "INSERT INTO students (major, email, firstName, lastName, studentID, Appt, plans) VALUES ('" . $_POST['major'] . "','" . $_POST['email'] . "','" . $_POST['firstName'] . "','" . $_POST['lastName'] . "','" . $_POST['studentID'] . "','" . $_POST['ID'] . "', '" . $_POST['response1'] . "')";
     //echo "<br>" . $sql . "<br>";
     mysql_query($sql, $conn);
     $sql = "UPDATE appointments SET NumStudents=NumStudents+1 WHERE id='" . $_POST['ID'] . "'";
@@ -183,8 +183,8 @@ if ($student)
     echo "<tr class='extraInfo " . strtolower($student['studentID']) . "'>";
     echo "<td colspan='6'>";
     echo "<div class='studentExtraInfo'>";
-    echo "What are your current post-UMBC plans?<br>" . "";
-    echo "<br>Questions or concerns for advising<br>" . "";
+    echo "What are your current post-UMBC plans?<br>" . "&nbsp;&nbsp;&nbsp;&nbsp;" . $student['plans'];
+    echo "<br>Questions or concerns for advising<br>" . "&nbsp;&nbsp;&nbsp;&nbsp;" . $student['concerns'];
     echo "<br>";
     echo "</div></td>";
     echo "</tr>";

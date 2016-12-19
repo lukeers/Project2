@@ -12,7 +12,7 @@
             </div>
             <label>First Name: </label><input type='text' name='firstName' required><br><br>
             <label>Last Name:  </label><input type='text' name='lastName' required><br><br>
-            <label>Student ID: </label><input type='text' name='studentID' pattern='[A-Za-z]{2}\d{5}' required><br><br>
+            <label>Student ID: </label><input type='text' name='studentID' pattern='[A-Za-z]{2}\d{5}' class='caps' required><br><br>
             <label>UMBC Email: </label><input type='email' name='email' required><br><br>
             <label>Major:      </label><select name="major" required>
   		        <!-- This creates a drop down box of the possible major choices -->
@@ -127,6 +127,10 @@ function hideOverlay(){
 .overlayTextCenter
 {
   text-align: center;
+}
+.caps
+{
+  text-transform: uppercase;
 }
 label{
   width: 100px;

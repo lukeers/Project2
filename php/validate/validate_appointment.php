@@ -19,7 +19,6 @@ date_default_timezone_set('America/New_York');
 $date = $_POST['date'];
 $time = $_POST['time'];
 $location = $_POST['location'];
-$group = $_POST['group'];
 $maxsize = $_POST['group_size'];
 
 // Create a date for today
@@ -57,6 +56,14 @@ if($errors != "True")
   echo $sql;
 
   // Insert a new appointment into the appointments table
+  if($maxsize == 1)
+  {
+    $group = 1;
+  }
+  else
+  {
+    $group = 0;
+  }
   $sql = "INSERT INTO appointments (Date, Time, Location, isGroup, Advisor, AdvisorUsername, size) VALUES ('" . $date . "', '" . $time . "', '" . $location . "', '" . $group . "', '" . $fullName . "', '" . $_SESSION['username'] . "','" . $maxsize . "')";
   $rs = mysql_query($sql, $conn);
 

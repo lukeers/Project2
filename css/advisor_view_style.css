@@ -1,0 +1,62 @@
+table{
+  border-collapse: collapse;
+}
+table.list_view, .list_view th, .list_view td {
+  border: 1px solid black;
+}
+
+table.calendar_view, .calendar_view th, .calendar_view td {
+  border: 1px solid black;
+}
+
+td {
+text-align:center;
+vertical-align:middle;
+}
+h3
+{
+  margin: 0px
+}
+
+/* Defines the colors for the user and other-users */
+.userRow, .userButton, .userButtonColor
+{
+  background-color: palegreen;
+}
+.otherUserRow, .otherUserButton, .otherUserButtonColor
+{
+  background-color: lightblue;
+}
+
+/* Checkboxs at the top of the page which show and hide each users appointments */
+#CheckBoxContainer
+{
+  margin: 1px 0px;
+}
+/* Spaces out the checkboxes */
+#CheckBoxStyle.otherUserButtonColor
+{
+  margin-left: 80px;
+}
+/* Applies custom checkbox style */
+#CheckBoxStyle
+{
+  -webkit-appearance: none;
+  border: 1px black solid;
+  padding: 5px;
+  margin: 0px 2px;
+  border-radius: 5px;
+  position: relative;
+}
+#CheckBoxStyle:focus
+{
+  outline: none;
+}
+#CheckBoxStyle:checked:after
+{
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  top: -6px;
+  left: 1px;
+}

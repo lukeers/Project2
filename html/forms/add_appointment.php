@@ -48,18 +48,20 @@ File call/redirect
       </select>
     </p>
     <p>Location: <input type=text name="location" required></p>
-    <p>Group? <select name="group">
-	<option value=1 selected>Yes</option>
-	<option value=0>No</option>
+
+    <!-- Old group selection -->
+    <!-- <p>Group? <select name="group">
+	     <option value=1 selected>Yes</option>
+	     <option value=0>No</option> -->
+
   </select>
-      <br>
       <input type="radio" class="appointSize" name="group_size" value="1" required>1
       <input type="radio" class="appointSize" name="group_size" value="5">5
       <input type="radio" class="appointSize" name="group_size" value="10">10
       <input type="radio" class="appointSize" name="group_size" value="15">15
       <input type="radio" class="appointSize" name="group_size" value="20">20
       <input type="radio" class="appointSize" name="group_size" value="" id="other">
-          <input class="appointSize_other" type="number" min="0" onkeyup="groupSizeOther(this.value)">
+          <input class="appointSize_other" type="number" placeholder="Other" min="0" onkeyup="groupSizeOther(this.value)">
     </p>
     <p><input type=submit value="Submit"/></p>
     </form>

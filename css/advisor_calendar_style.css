@@ -1,0 +1,58 @@
+/*When there is a scroll bar display it*/
+.appointmentButton::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+.appointmentButton::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+/* Calendar View Style */
+.list_view
+{
+  display: none;
+  margin-top: 10px;
+}
+#calendar_view
+{
+  display: inline-block;
+}
+#td_dayOfWeek
+{
+  min-width: 145px;
+  text-align: center;
+}
+table#calendar_view th
+{
+  text-align: right;
+}
+#calendar_view tr, #calendar_view td, #calendar_view th
+{
+  border: 1px black solid
+}
+#Month
+{
+  text-align: center;
+}
+#calendar_view form
+{
+  height: 5px;
+}
+/* Container for buttons */
+.appointmentButton
+{
+  border-top: 1px black dotted;
+  padding-top: 5px;
+  text-align: center;
+  height: 132px;
+  overflow: auto;
+}
+#calendar_view button.userButton, #calendar_view button.otherUserButton
+{
+  border-radius: 7px;
+  border: 1px black solid;
+  margin: 1px;
+  min-width: 135px;
+}
+/* End of Calendar View Style */
