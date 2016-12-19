@@ -1,0 +1,83 @@
+/*Error msg*/
+.error{
+  display: inline-block;
+  margin: 6px;
+  padding: 5px;
+  border: 1px black solid;
+
+  background-color: lightcoral;
+  border-radius: 6px;
+}
+
+/*Hides students extra information*/
+.extraInfo
+{
+  display: none;
+}
+.studentExtraInfo
+{
+  text-align: left;
+}
+/*Style for button to expand extra info*/
+.expandInfo:hover
+{
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+}
+/*table style for student showing*/
+#displayStudents th, #displayStudents td:not(.ButtonContainers) {
+border: 1px solid black;
+}
+
+#displayStudents td, #displayStudents th {
+text-align:center;
+vertical-align:middle;
+padding: 3px 6px;
+}
+
+/*Meeeting information and student display style*/
+#displayStudents, #meetingInformation
+{
+  display: inline-block;
+  border-collapse: collapse;
+}
+
+#meetingInformation
+{
+  margin-top: 10px;
+}
+
+#meetingInformation td
+{
+  border: 1px black solid;
+  padding: 3px 5px;
+}
+/*Style for adding students to meeting button*/
+.addStudentButton
+{
+  float: left;
+  margin-left: 10px;
+}
+/*Possible style for editing meeting*/
+.editMeeting
+{
+
+}
+.formDeleteMeet
+{
+  display: inline;
+}
+
+ /*Delete button style*/
+.deleteMeetingButton
+{
+  float: right;
+  background-color: darkred;
+  color: white;
+  border-radius: 7px;
+}
+.deleteMeetingButton:hover
+{
+  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, 0.6), 0 0 1px transparent;
+}

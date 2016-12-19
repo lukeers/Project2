@@ -33,7 +33,7 @@ echo(date("F",$recordTime));
 echo("<button type='submit' name='monthEval' value=" . ($countTime + 1) . ">&#62</button>");
 echo("</form>");
 echo("</td></tr><tr>");
-//Text day of week printing
+//Text day of week printing (eg. Mon, Tues, Wed)
 for($i = 0 ; $i < (count($days) - 2) ; $i++)
 {
   echo("<td id='td_dayOfWeek'>" . $days[$i] . "</td>");
@@ -50,12 +50,14 @@ while($recordTime != strtotime('last day of +0 months',$recordTime))
   //Printing the day only if weekday
   if((date('D',$recordTime) == $days[$i]) && ($days[$i] != "Sat") && ($days[$i] != "Sun"))
   {
+    //Sets up cell with printing day #
     echo("<th>" . date('j',$recordTime));
     echo("<div class='appointmentButton'>");
     //Passes the day to find what appointments fit there
     printAppointments($recordTime, $storage_array);
     echo("</div>");
     echo("</th>");
+    //After printing go to next day
     $recordTime = strtotime('+1 days',$recordTime);
 
   }
@@ -75,19 +77,19 @@ while($recordTime != strtotime('last day of +0 months',$recordTime))
   {
     echo("<td></td>");
   }
-  //echo(date("m/d/y",$recordTime) . "<br>");
 }
 //Printing to complete the month boxes
+//Note: due to how end date had to work, it stops one day before the last day of the month
 $i += 2;
 //If end of printing is not Saturday or Sunday, then print the final day
 if((date('D',$recordTime) != "Sat") && (date('D',$recordTime) != "Sun"))
 {
+  //Setting up cell
   echo("<th>" . date('j',$recordTime));
   echo("<div class='appointmentButton'>");
   //Function at the bottom
   printAppointments($recordTime, $storage_array);
   echo("</div>");
-  //echo("<div class='appointmentButton'><button>11am-12pm | 3/6</button></div>");
   echo("</th>");
 }
 //Print to complete the calendar boxes
@@ -102,6 +104,9 @@ echo("</table>");
 
 <!-- PHP FUNCTIONS -->
 <?php
+//Fcn: Prints all appointments that are in the passed day
+//Vars: timeEvaluation - the time to see if appointments are in
+//      appointmentArray - array of all appointments
 function printAppointments($timeEvaluation, $appointmentArray)
 {
   for($i = 0 ; $i < count($appointmentArray) ; $i++)

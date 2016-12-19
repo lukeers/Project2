@@ -9,88 +9,7 @@ Sends to:
 <html>
 <head>
 <title>View Students</title>
-<style>
-/*Error msg*/
-.error{
-  display: inline-block;
-  margin: 6px;
-  padding: 5px;
-  border: 1px black solid;
-
-  background-color: lightcoral;
-  border-radius: 6px;
-}
-
-.extraInfo
-{
-  display: none;
-}
-.studentExtraInfo
-{
-  text-align: left;
-}
-.expandInfo:hover
-{
-  background-color: black;
-  color: white;
-  font-weight: bolder;
-}
-#displayStudents th, #displayStudents td:not(.ButtonContainers) {
-border: 1px solid black;
-}
-
-#displayStudents td, #displayStudents th {
-text-align:center;
-vertical-align:middle;
-padding: 3px 6px;
-}
-
-#displayStudents, #meetingInformation
-{
-  display: inline-block;
-  border-collapse: collapse;
-}
-
-#meetingInformation
-{
-  margin-top: 10px;
-}
-
-#meetingInformation td
-{
-  border: 1px black solid;
-  padding: 3px 5px;
-}
-.addStudentButton
-{
-  float: left;
-  margin-left: 10px;
-}
-.editMeeting
-{
-
-}
-.formDeleteMeet
-{
-  display: inline;
-}
-
- /*Delete button style*/
-.deleteMeetingButton
-{
-  float: right;
-  background-color: darkred;
-  color: white;
-  border-radius: 7px;
-}
-.deleteMeetingButton:hover
-{
-  box-shadow: inset 3px 3px 3px rgba(255, 255, 255, 0.6), 0 0 1px transparent;
-}
-
-
-
-</style>
+<link href="../../css/view_students_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -192,11 +111,11 @@ if ($student)
   }
   //Making option buttons
   echo "<tr>";
+  //Add student
   echo "<td colspan='2' class='ButtonContainers'><button class='addStudentButton' onclick='showOverlay(this.value)' value='addStudent'>Add Student</button></td>";
+  //Edit meeting
   echo "<td colspan='2' class='ButtonContainers'><button class='editMeeting' onclick='showOverlay(this.value)' value='updateMeeting'>Edit Meeting</button></td>";
-  //echo "<td colspan='2' class='ButtonContainers'><form action='../cancel_advisor_appointment.php' method='post' class='formDeleteMeet'>";
-  // echo "<button type='submit' name='ID' value='" . $_POST['ID'] . "' class='deleteMeetingButton'>Delete Meeting</button>";
-  // echo "</form></td>";
+  //Delete Meeting
   echo "<td colspan='2' class='ButtonContainers'>";
   echo "<button onclick='showOverlay(this.value)' value='deleteMeetingCheck' class='deleteMeetingButton'>Delete Meeting</button>";
   echo "</td>";
@@ -204,23 +123,26 @@ if ($student)
 }
 else {
   //Option buttons when no students are enrolled in the appointment
+  //Add student
   echo "<br><br><button class='addStudentButton' onclick='showOverlay(this.value)' value='addStudent'>Add Student</button>";
+  //Edit meeting
   echo "<button class='editMeeting' onclick='showOverlay(this.value)' value='updateMeeting'>Edit Meeting</button>";
-  // echo "<form action='../cancel_advisor_appointment.php' method='post' class='formDeleteMeet'>";
-  // echo "<button type='submit' name='ID' value='" . $_POST['ID'] . "' class='deleteMeetingButton'>Delete Meeting</button>";
-  // echo "</form><br>";
+  //Delete meeting
   echo "<button onclick='showOverlay(this.value)' value='deleteMeetingCheck' class='deleteMeetingButton'>Delete Meeting</button><br>";
 }
 ?>
 
-<p><a href = "advisor_view.php"> Go Back to Advisor View </a></p>
+<p><a href="advisor_view.php"> Go Back to Advisor View </a></p>
 
 </body>
+<!-- Java Functions -->
 <script>
   //Shows and Hides students details when clicked on row
   function showDetails(element)
   {
+    //Gets the id of the student clicked
     showRows = document.getElementsByClassName(element.id);
+    //Shows concerns and plans for the student
     for(i = 0 ; i < showRows.length ; i++)
     {
       if(showRows[i].style.display === "table-row"){

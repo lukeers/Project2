@@ -3,6 +3,8 @@
 // Prints out the titles of the table
 //Prints out inorder
 //Group, individual, Old
+
+//$appt was setup beforehand in advisor_view.php
 if($appt)
 {
   //Buttons for the two views
@@ -29,7 +31,9 @@ if($appt)
 
   // Now this cycles through the section of the query
   while ($appt) {
+    //Holdes appointments for future printing in calendar view
     array_push($storage_array,$appt);
+
     //Sorts into past appointments and future
     //If appoint was in past store for later
     if(strtotime($appt['Date']) < strtotime("Now"))
@@ -45,11 +49,11 @@ if($appt)
       $appt = mysql_fetch_array($rs);
       continue;
     }
-    //Returns 0 if they are equal (doesn't look at case)
+    //Prints the row for the appointment
     PrintListRow($appt);
+    //Get another appointment from the database
     $appt = mysql_fetch_array($rs);
-}
-
+  }
   echo "</table><br class='list_view'>";
 
   //Printing individual appointments
@@ -63,6 +67,7 @@ if($appt)
   echo "<th>#Students</th>";
   echo "<th>View Registered Students</th>";
   echo "</tr>";
+  //Goes through all individual appointments and prints them
   for($i = 0 ; $i < count($catch_case_appointments) ; $i++)
   {
     PrintListRow($catch_case_appointments[$i]);
@@ -88,7 +93,7 @@ if($appt)
   }
   echo "</table>";
 }
-
+//If there are no appointments
 else
 {
   echo "<h3>You have not scheduled any appointments<br>";
@@ -102,10 +107,12 @@ else
 //Prints the row for the appointment
 function PrintListRow($appt, $prtCancel = 1)
 {
+  //If the current user matches the appointment user
   if(strcasecmp($_SESSION['username'] , $appt['AdvisorUsername']) == 0)
   {
     echo "<tr class='userRow'>";
   }
+  //Different user than the one logged in
   else
   {
     echo "<tr class='otherUserRow'>";
@@ -122,6 +129,7 @@ function PrintListRow($appt, $prtCancel = 1)
     echo "</form>";
     echo "</td>";
   }
+  //Printing appointment with no cancel button
   else {
     //Printing appointment with no cancel button
     PrintListAppointment($appt, 0);

@@ -7,37 +7,22 @@
   echo $apptID;
   session_start();
 
-  //query for isFull calc
-  $sql = "SELECT isGroup, NumStudents FROM appointments WHERE id=$apptID";
+  //query for appointment info
+  $sql = "SELECT * FROM appointments WHERE id=$apptID";
   echo $sql;
   $rs = mysql_query($sql, $conn);
   $appt = mysql_fetch_array($rs);
 
-  // This checks if the appointment is a group appointment
-  if ($appt['isGroup'] == 1) {
-
-    // This is if is Group is true
-    if ($appt['NumStudents'] == 9) {
-
-      // This is if the amount of students is one before full, so now that one more student is added
-      // isFull will be changed to true
-      $sql = "UPDATE appointments SET isFull=1, NumStudents=(NumStudents+1) WHERE id=$apptID";
-      mysql_query($sql, $conn);
-    } else {
-
-      // group but not full yet
-      echo "UPdating appoitnments table group<br/>";
-      $sql = "UPDATE appointments SET NumStudents=(NumStudents+1) WHERE id=$apptID";
-      mysql_query($sql, $conn);
-
-    }
-  } else {
-
-    // Not a group
-    echo "Updating appointments table not Group<br/>";
-    $sql = "UPDATE appointments SET NumStudents=1, isFull=1 WHERE id=$apptID";
+  // This checks if the appointment is about to be full
+  if($appt['NumStudents'] == ($appt['size'] - 1))
+  {
+    $sql = "UPDATE appointments SET isFull=1, NumStudents=(NumStudents+1) WHERE id=$apptID";
     mysql_query($sql, $conn);
-
+  }
+  else
+  {
+    $sql = "UPDATE appointments SET NumStudents=(NumStudents+1) WHERE id=$apptID";
+    mysql_query($sql, $conn);
   }
 
   echo "Update students table <br/>";
@@ -46,6 +31,8 @@
   echo "<br>Students Table:" . $sql;
   mysql_query($sql, $conn);
 
-  //header('Location:view/student_view.php');
+  header('Location:view/student_view.php');
 
 ?>
+<br>
+<a href="view/student_view.php">Link to student view</a>

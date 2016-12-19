@@ -1,5 +1,4 @@
 <div id='overlay'>
-  <!-- <p> -->
     <!-- Content to update meeting -->
     <table id='tOverlay'>
       <tr>
@@ -88,16 +87,18 @@
         </td>
       </tr>
     </table>
-  <!-- </p> -->
 </div>
 
+<!-- Java Functions -->
 <script>
+//On startup adjusts the size and positioning of the overlay box
 document.addEventListener("DOMContentLoaded", function(event) {
   var overlay_width = document.getElementById('overlay').offsetWidth;
   document.getElementById("overlay").style.left = ((window.outerWidth-overlay_width)/2) + "px";
   document.getElementById('overlay').style.display = "none";
 });
 
+//When window browser is adjusted, resizes the overlay box
 window.addEventListener('resize', function(event){
   var overlay_width = document.getElementById('overlay').offsetWidth;
   var overlay_height = document.getElementById('overlay').offsetHeight;
@@ -105,14 +106,19 @@ window.addEventListener('resize', function(event){
   document.getElementById("overlay").style.top = ((window.outerHeight-overlay_height)/2) + "px";
 });
 
+//Fcn: Will hide old forms and show new one while adjusting size
 function showOverlay(formType){
   console.log(formType);
+  //Hides old forms
   hideOverlay();
   document.getElementById('overlay').style.display = "block";
   document.getElementById(formType).style.display = "table-cell";
+  //Adjusting size for new form
   var overlay_height = document.getElementById('overlay').offsetHeight;
   document.getElementById("overlay").style.top = ((window.outerHeight-overlay_height)/2) + "px";
 }
+
+//Fcn: Hides all forms in the overlay
 function hideOverlay(){
   document.getElementById('overlay').style.display = "none";
   elements = document.getElementsByClassName('overlayForm');
