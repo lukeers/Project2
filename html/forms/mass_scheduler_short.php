@@ -23,17 +23,8 @@ include("../../php/advisor_nav_bar.php");
 
   <?php
 
-  // get the start and end of the week
-  $currentDate = date('Y-m-d');
+  // get the start of the week
   $startOfWeek = date('Y-m-d', strtotime("next monday"));
-
-  $date = date('Y-m-d',strtotime($startOfWeek . ' +1 day'));
-  $endOfWeek = date('Y-m-d', strtotime("next friday next week"));
-
-  //
-  echo("<h1>Start Week: ". $startOfWeek . "</h1>");
-  echo("<h2>End Week: ". $endOfWeek . "</h2>");
-  echo("<h3>Date: " . $date . "</h3>");
 
   echo("Week Start Date: ");
   echo("<input type=\"date\"name=\"startdate\" value=\"". $startOfWeek ."\">");
