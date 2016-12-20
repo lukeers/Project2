@@ -53,6 +53,17 @@ else
   $error_message = "Username and/or password not recognized.<br>";
   $_SESSION['error_message'] = $error_message;
   $_SESSION['user'] = "advisor";
-  include('../../html/forms/main_login.php');
+  //checking if offseason
+  $sql = "SELECT status FROM websitestatus";
+  $rs = mysql_query($sql, $conn);
+  $status = mysql_fetch_array($rs);
+  if($status['status'] == "Off")
+  {
+    include("../../html/forms/advisor_offseason_login.php");
+  }
+  else
+  {
+    include('../../html/forms/main_login.php');
+  }
 }
 ?>
