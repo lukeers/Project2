@@ -17,7 +17,7 @@ html
     border-style: solid;
 }
 
-h1 
+h1
 {
    font-family: "arial";
    font-size: 30px;
@@ -33,14 +33,14 @@ h1
   text-transform: uppercase;
 }
 
-.switch 
+.switch
 {
     display: block;
     text-align: center;
 	border-bottom: thin solid;
 }
 
-.switch .button 
+.switch .button
 {
     background-color: LightGrey;
 	padding: 10px 15px;
@@ -51,7 +51,7 @@ h1
 }
 
 
-#submit.button 
+#submit.button
 {
     background-color: #66AA44;
     color: white;
@@ -66,7 +66,7 @@ table.studentAppointment
 {
   border-collapse: collapse;
   border-spacing: 0px 5px;
- 
+
 }
 
 table.studentAppointment th, table.studentAppointment td
@@ -82,7 +82,7 @@ background-color: lightblue;
 }
 
 /*Schedule Student Appointment CSS*/
-#section 
+#section
 {
 	border-bottom: thin solid;
     padding-bottom: 10px;
@@ -96,9 +96,8 @@ input[type='checkbox']
 
 table.appointmentList
 {
-  border-collapse: collapse;
+  border-collapse: separate;
   border-spacing: 0px 5px;
-  border: 1px solid black;
 }
 
 .appointList
