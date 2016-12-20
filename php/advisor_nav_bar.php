@@ -34,6 +34,7 @@
       <a href="../../html/forms/mass_scheduler_short.php" class="nav_links"><p class="nav_links">Weekly Scheduler</p></a>
       <a href="../../php/reports/report_form.php" class="nav_links"><p class="nav_links">Make Reports</p></a>
       <a href="../../html/forms/register_advisor.php" class="nav_links"><p class="nav_links">Register Advisor</p></a>
+      <a href="../../html/forms/edit_info_form.php" class="nav_links"><p class="nav_links">Change Advisor Info</p></a>
       <!-- Links will fall to bottom of the page -->
     <div id="fillRest">
       <?php
