@@ -29,10 +29,10 @@ File Call/Redirect
 	<input type="radio" name="typeMeeting" id="IndividMeeting" value="group0" onclick="radioToggle(this)">Individual
 
   </div>
-  
+
   <div id="section">
 	<b>Advisor:</b><br>
-	
+
   <?php
 	//Add advisors names and username
 	$sql = "Select Username, fullName from advisors";
@@ -42,8 +42,8 @@ File Call/Redirect
 	}
   ?>
   </div>
-  
-  
+
+
    <!-- Day Options -->
  <div id="section">
    <b>Day:</b><br>
@@ -53,6 +53,7 @@ File Call/Redirect
 	<input type="checkbox" onchange="toggleCheckbox(this)" value="Thurs" checked>Thurs
 	<input type="checkbox" onchange="toggleCheckbox(this)" value="Fri" checked>Fri
 </div>
+	<br>
 
 	<table class="appointmentList">
 	  <th class='appointContent'>Advisor</th>
@@ -63,7 +64,7 @@ File Call/Redirect
 	</th>
 	<?php
 	  $todayTimeStamp = strtotime("now");
-	  $sql = "SELECT * FROM appointments WHERE Date>='" . date("Y-m-d", $todayTimeStamp) . "' ORDER BY Date ASC, Time ASC";
+	  $sql = "SELECT * FROM appointments WHERE Date>='" . date("Y-m-d", $todayTimeStamp) . "' AND NumStudents<size ORDER BY Date ASC, Time ASC";
 	  $rs = mysql_query($sql, $conn);
 	  while ($appoint = mysql_fetch_array($rs))
 	  {
@@ -87,7 +88,7 @@ File Call/Redirect
 	 ?>
 
 </div>
-	 
+
 <link rel="import" href="../html/footer.html")>
 
 
