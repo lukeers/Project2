@@ -1,9 +1,8 @@
-<?php
 
-<link rel="import" href="../header.html")>
+<link rel="import" href="../header.html">
 <link rel='stylesheet' type='text/css' href='../../css/style.css'/>
 
-<div id="AdvisorRegistration">
+<div id="AdvisorRegistration" class="main">
   <h1>Advisor Login</h1>
 
 <table class="formContainer"><form name="advisorform" method=post action='../../php/validate/validate_advisor_login.php' onsubmit="return validateAdvisorForm();">
@@ -33,6 +32,3 @@ function validateAdvisorForm() {
 </script>
 
 <link rel="import" href="../footer.html")>
-
-
- ?>
