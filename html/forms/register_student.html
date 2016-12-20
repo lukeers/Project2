@@ -9,7 +9,7 @@
 	<p><tr><td>Last Name: </td><td><input type=text name="lastName" required/></td></tr></p>
 	<p><tr><td>Student ID: </td><td><input type=text name="studentID" class="caps" required/></td><td><p id="idErr"></p></td></tr></p>
 	<p><tr><td>UMBC Email: </td><td><input type=text name="email" required/></td><td><p id="emailErr"></p></td></tr></p>
-	<p><tr><td>Major: </td><td><select name="major">
+	<p><tr><td>Major: </td><td><select name="major" onchange="Clicked(this.value)">
 		<!-- This creates a drop down box of the possible major choices -->
 		<option value = "Biological Sciences BA">Biological Sciences BA</option>
 		<option value = "Biological Sciences BS">Biological Sciences BS</option>
@@ -21,8 +21,11 @@
 		<option value = "Chemistry Education BA">Chemistry Education BA</option>
 		<option value = "Other">Other</option>
 	</select></td></tr></p>
-	<p><tr><td><br><button type="submit" id="submit" class="button">Next</button></td></tr></p>
+	<p><tr><td><br>
+		<button type="submit" id="submit" class="button" name="studentSubmit">Next</button>
+	</td></tr></p>
 	</form></table>
+	<p id="otherMsg"></p>
 </div>
 
 <script>
@@ -48,5 +51,17 @@
 			document.getElementById("emailErr").innerHTML = "";
 		}
 		return isValid;
+	}
+	function Clicked(value)
+	{
+		if(value === "Other")
+		{
+			document.getElementsByName('studentSubmit')[0].style.display = "none";
+			document.getElementById('otherMsg').innerHTML = "You can find advising contact information for your new major on the Office for Academic and Pre-Professional Advising Office’s Departmental Advising page. That contact person/office will be able to give you instructions on how to schedule an advising appointment with someone in that area. <br><br>Good luck with your new major!";
+		}
+		else {
+			document.getElementsByName('studentSubmit')[0].style.display = "block";
+			document.getElementById('otherMsg').innerHTML = "";
+		}
 	}
 </script>
