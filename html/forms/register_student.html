@@ -34,10 +34,18 @@
 			document.getElementById("idErr").innerHTML = "Invalid student ID.";
 			isValid = false;
 		}
+		else{
+			x.studentID.style.borderColor = "rgb(238,238,238)";
+			document.getElementById("idErr").innerHTML = "";
+		}
 		if(!/^\w+@umbc\.edu$/g.test(x.email.value)){
 			x.email.style.borderColor = "red";
 			document.getElementById("emailErr").innerHTML = "Invalid student email.";
 			isValid = false;
+		}
+		else{
+			x.email.style.borderColor = "rgb(238,238,238)";
+			document.getElementById("emailErr").innerHTML = "";
 		}
 		return isValid;
 	}
