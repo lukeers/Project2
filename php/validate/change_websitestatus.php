@@ -60,7 +60,7 @@
 
 
     // TODO needs a path to go to when comeplete
-    header("Location: ../view/advisor_view.php")
+    header("Location: ../view/advisor_view.php");
 
   }
 
