@@ -51,7 +51,7 @@ File Call/Redirect
 	<input type="checkbox" onchange="toggleCheckbox(this)" value="Mon" checked>Mon
 	<input type="checkbox" onchange="toggleCheckbox(this)" value="Tue" checked>Tues
 	<input type="checkbox" onchange="toggleCheckbox(this)" value="Wed" checked>Wed
-	<input type="checkbox" onchange="toggleCheckbox(this)" value="Thurs" checked>Thurs
+	<input type="checkbox" onchange="toggleCheckbox(this)" value="Thu" checked>Thurs
 	<input type="checkbox" onchange="toggleCheckbox(this)" value="Fri" checked>Fri
 </div>
 	<br>
