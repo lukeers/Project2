@@ -429,6 +429,6 @@ if(!empty($_POST["fri"])) {
   }
 }
 
-header("Location: ../view/advisor_view.php");
+header("Location: /view/advisor_view.php");
 
 ?>
