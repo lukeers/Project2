@@ -36,7 +36,7 @@ if(isset($_POST['typeOfSubmit']))
   }
   //If update meeting was selected
   elseif ($_POST['typeOfSubmit'] == "Update") {
-    $sql = "SELECT * FROM appointments WHERE Date='" . $_POST['Date'] . "' AND Time='" . $_POST['Time'] . "' AND AdvisorUsername='" . $_SESSION['username'] . "'";
+    $sql = "SELECT * FROM appointments WHERE Date='" . $_POST['Date'] . "' AND Time='" . $_POST['Time'] . "' AND AdvisorUsername='" . $_SESSION['username'] . "' AND id!='". $_POST['ID'] ."'";
     //echo $sql;
     $rs = mysql_query($sql, $conn);
     if(mysql_num_rows($rs) == 0)
