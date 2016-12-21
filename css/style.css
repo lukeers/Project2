@@ -3,6 +3,7 @@ html
 {
     background-image: url("images/truegrit_background.jpg");
     background-position: right top;
+	background-repeat: no-repeat;
 }
 
 .main
